@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/icon.webp" type="image/webp" sizes="16x16">
+    <title>Get in Touch - Baresto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <!-- CSS Files
+    ================================================== -->
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/coloring.css" type="text/css">
+
+    <!-- css for scheme color -->
+    <link rel="stylesheet" href="css/cream.css" type="text/css" id="colors">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/03_custom.css" type="text/css">
+
+    <style>
+        .wow {
+            visibility: visible !important;
+        }
+
+        #subheader {
+            position: relative;
+        }
+
+        #subheader h1 {
+            float: none;
+            margin: 0 0 12px 0;
+            padding: 0;
+            border: none;
+            display: block;
+            font-family: var(--title-font);
+            font-size: 48px;
+            font-weight: var(--title-font-weight);
+            letter-spacing: -.015em;
+            line-height: 1.2;
+            text-transform: none;
+            color: #ffffff;
+        }
+
+        #subheader .breadcrumb {
+            margin-top: 12px;
+            margin-bottom: 0;
+        }
+
+        .location-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .location-header h3 {
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .location-header p {
+            margin-bottom: 4px;
+            color: var(--body-font-color-dark);
+        }
+
+        .location-header a {
+            color: var(--body-font-color-dark);
+            text-decoration: none;
+        }
+
+        .location-header a:hover {
+            color: var(--primary-color);
+        }
+
+        #contact_form input[type=text],
+        #contact_form input[type=email] {
+            height: 44px;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            background: transparent;
+            border: solid 1px var(--secondary-color) !important;
+            border-radius: 3px !important;
+        }
+
+        #contact_form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        #contact_form textarea.form-control {
+            height: 172px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            background: transparent;
+            border: solid 1px var(--secondary-color) !important;
+            border-radius: 3px !important;
+        }
+
+        #contact_form input[type=submit].btn-custom {
+            margin-top: 20px;
+            padding: 10px 30px;
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        #contact_feedback {
+            display: none;
+            margin-top: 20px;
+            padding: 14px 18px;
+            border-radius: 3px;
+            border: 1px solid var(--secondary-color);
+            color: #ffffff;
+            background: rgba(227, 192, 134, 0.12);
+        }
+
+        #contact_feedback.error {
+            border-color: #d31e2b;
+            background: rgba(211, 30, 43, 0.14);
+        }
+
+        .contact-map-wrap {
+            position: relative;
+            border: 1px solid rgba(227, 192, 134, 0.35);
+            border-radius: 6px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 410px;
+            background: #1c1a17;
+        }
+
+        .contact-map-fallback {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+            color: var(--body-font-color-dark);
+            background:
+                linear-gradient(90deg, rgba(227, 192, 134, 0.06) 1px, transparent 1px) 0 0 / 48px 48px,
+                linear-gradient(rgba(227, 192, 134, 0.06) 1px, transparent 1px) 0 0 / 48px 48px,
+                radial-gradient(circle at 50% 45%, rgba(227, 192, 134, 0.14), rgba(24, 25, 27, 0.96) 70%);
+            pointer-events: none;
+        }
+
+        .contact-map-fallback i {
+            font-size: 30px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .contact-map-fallback strong {
+            color: #ffffff;
+            font-family: var(--title-font);
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .contact-map-wrap iframe {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            min-height: 410px;
+            border: 0;
+            display: block;
+            filter: sepia(18%) saturate(88%) brightness(88%) contrast(105%);
+            transition: filter 0.3s ease;
+        }
+
+        .contact-map-wrap:hover iframe {
+            filter: sepia(0%) saturate(100%) brightness(98%) contrast(102%);
+        }
+
+        .contact-directions-card {
+            border: 1px solid rgba(227, 192, 134, 0.28);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            padding: 28px 26px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-directions-card h4 {
+            color: #ffffff;
+            margin-bottom: 18px;
+        }
+
+        .contact-detail-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 22px 0;
+        }
+
+        .contact-detail-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--body-font-color-dark);
+        }
+
+        .contact-detail-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-detail-list li i {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .contact-detail-list li strong {
+            display: block;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .contact-detail-list a {
+            color: var(--body-font-color-dark);
+            text-decoration: none;
+        }
+
+        .contact-detail-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-directions-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #section-testimonials .de-review-app {
+            background: rgba(255, 255, 255, 0.02);
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        #section-testimonials .de-review-app:hover {
+            border-color: rgba(227, 192, 134, 0.65);
+            transform: translateY(-3px);
+        }
+
+        @media only screen and (max-width: 992px) {
+            header.transparent:not(.bg-dark) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: transparent !important;
+                background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 100%);
+            }
+
+            #subheader {
+                padding: 95px 0 35px 0;
+            }
+
+            #subheader h1 {
+                font-size: 38px;
+                margin: 0 0 10px 0;
+            }
+
+            .contact-map-wrap,
+            .contact-map-wrap iframe {
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-scheme">
+
+    <div id="wrapper">
+
+        <!-- header begin -->
+        <header class="header_center transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- logo begin -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img class="logo logo_dark_bg" src="images/logo.webp" alt="">
+                                <img class="logo logo_light_bg" src="images/logo.webp" alt="">
+                            </a>
+                        </div>
+                        <!-- logo close -->
+
+                        <!-- small button begin -->
+                        <span id="menu-btn"></span>
+                        <!-- small button close -->
+
+                        <!-- mainmenu begin -->
+                        <nav>
+                            <ul id="mainmenu">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="menu.html">menu</a></li>
+                                <li><a href="booking.html">Booking</a></li>
+                                <li><a href="about.html">About</a>
+                                    <ul>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="gallery.html">Gallery</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- mainmenu close -->
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+
+        <!-- content begin -->
+        <div id="content" class="no-bottom no-top">
+
+            <!-- subheader begin -->
+            <section id="subheader" class="jarallax text-light">
+                <img src="images/slide-1.webp" class="jarallax-img" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h5 class="uptitle">Get in</h5>
+                            <h1>Touch</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- subheader close -->
+
+            <!-- contact section begin -->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="location-header">
+                                <h3>Our Location</h3>
+                                <p>Collins Street West, Victoria 8007 Australia</p>
+                                <p>T. (208) 333 9296</p>
+                                <p>E. <a href="mailto:contact@baresto.com">contact@baresto.com</a></p>
+                            </div>
+
+                            <form name="contactForm" id="contact_form" method="post" action="#">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div>
+                                            <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" pattern="[A-Za-z\s]*[A-Za-z][A-Za-z\s]*" title="Please enter alphabets and spaces only" autocomplete="name" required>
+                                        </div>
+                                        <div>
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required>
+                                        </div>
+                                        <div>
+                                            <input type="tel" name="phone" id="phone" class="form-control" placeholder="Your Phone" inputmode="numeric" pattern="[0-9]+" maxlength="15" title="Please enter numbers only" autocomplete="tel" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <textarea name="message" id="message" class="form-control" placeholder="Your Message" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div id="submit">
+                                            <input type="submit" id="send_message" value="Send Message" class="btn-custom">
+                                        </div>
+                                        <div id="contact_feedback" role="status" aria-live="polite"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- contact section close -->
+
+            <!-- map section begin -->
+            <section id="section-map" data-bgcolor="rgba(255, 255, 255, .03)">
+                <div class="container">
+                    <div class="row g-4 align-items-stretch">
+                        <div class="col-lg-8 offset-lg-2 text-center mb-2">
+                            <h5 class="uptitle">Find Us</h5>
+                            <h2>Visit Baresto Melbourne</h2>
+                            <p class="lead">Located in the heart of Collins Street West — drop by for morning espresso, business lunches, or candlelit dinner.</p>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="contact-map-wrap">
+                                <div class="contact-map-fallback" aria-hidden="true">
+                                    <i class="fa fa-map-marker"></i>
+                                    <strong>Baresto Melbourne</strong>
+                                    <span>Collins Street West, Victoria 8007 Australia</span>
+                                </div>
+                                <iframe
+                                    title="Baresto Location Map"
+                                    src="https://www.openstreetmap.org/export/embed.html?bbox=144.9445%2C-37.8232%2C144.9560%2C-37.8162&amp;layer=mapnik&amp;marker=-37.8199%2C144.9502"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    onload="var fb = this.previousElementSibling; if (fb) fb.style.display = 'none';"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="contact-directions-card">
+                                <div>
+                                    <h4>Getting Here</h4>
+                                    <ul class="contact-detail-list">
+                                        <li>
+                                            <i class="fa fa-map-marker"></i>
+                                            <strong>Address</strong>
+                                            Collins Street West, Victoria 8007 Australia
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-clock-o"></i>
+                                            <strong>Opening Hours</strong>
+                                            Mon - Thu: 10:30AM - 9:30PM<br>
+                                            Fri: 10:00AM - 10:30PM &middot; Sat - Sun: 09:30AM - 11:00PM
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-subway"></i>
+                                            <strong>Public Transit &amp; Parking</strong>
+                                            2-minute walk from Southern Cross Station and Collins St tram stops 11 &amp; 48; evening valet nearby.
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-phone"></i>
+                                            <strong>Reservations &amp; Events</strong>
+                                            (208) 333 9296 &middot; <a href="mailto:contact@baresto.com">contact@baresto.com</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="contact-directions-actions">
+                                    <a href="404.html" class="btn-line">Open in Maps</a>
+                                    <a href="404.html" class="btn-line">Book a Table</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- map section close -->
+
+            <!-- testimonials section begin -->
+            <section id="section-testimonials">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-8 offset-lg-2 text-center mb-2">
+                            <h5 class="uptitle">Guest Stories</h5>
+                            <h2>What Our Guests Say</h2>
+                            <p class="lead">Rated 4.9 / 5 across 22,000+ diners for warm hospitality, single-origin coffee, and wood-fired dishes.</p>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="de-review-app h-100">
+                                <div class="d-logo">
+                                    <img src="images/google.webp" alt="Google Review">
+                                </div>
+                                <div class="d-testi">
+                                    Booked the private dining room via their contact team and every detail was effortless. The wood-fired sea bass and sommelier pairings wowed our guests.
+                                </div>
+                                <div class="d-testi-by">Elena Vance<span>Private Dining &middot; Mar 2026</span></div>
+                                <div class="d-stars">
+                                    <img src="images/google-stars.webp" alt="5 out of 5 stars">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="de-review-app h-100">
+                                <div class="d-logo">
+                                    <img src="images/trustpilot.webp" alt="Trustpilot Review">
+                                </div>
+                                <div class="d-testi">
+                                    So easy to reach right off Collins Street West. My go-to spot for client espresso meetings — calm acoustics, buttery croissants, and attentive staff.
+                                </div>
+                                <div class="d-testi-by">Marcus Thorne<span>Morning Coffee &middot; Feb 2026</span></div>
+                                <div class="d-stars">
+                                    <img src="images/trustpilot-stars.webp" alt="5 out of 5 stars">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="de-review-app h-100">
+                                <div class="d-logo">
+                                    <img src="images/google.webp" alt="Google Review">
+                                </div>
+                                <div class="d-testi">
+                                    We celebrated our anniversary here and the staff surprised us with warm tiramisu and candlelit window seating. Truly the warmest dining room in town.
+                                </div>
+                                <div class="d-testi-by">Priya Nair<span>Anniversary Dinner &middot; Feb 2026</span></div>
+                                <div class="d-stars">
+                                    <img src="images/google-stars.webp" alt="5 out of 5 stars">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="de-review-app h-100">
+                                <div class="d-logo">
+                                    <img src="images/trustpilot.webp" alt="Trustpilot Review">
+                                </div>
+                                <div class="d-testi">
+                                    Quick response when I called to adjust our dietary requirements for six guests. Gluten-free wood-fired flatbreads and house-roasted pour-over were standout.
+                                </div>
+                                <div class="d-testi-by">Daniel Brooks<span>Weekend Brunch &middot; Jan 2026</span></div>
+                                <div class="d-stars">
+                                    <img src="images/trustpilot-stars.webp" alt="5 out of 5 stars">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="de-review-app h-100">
+                                <div class="d-logo">
+                                    <img src="images/google.webp" alt="Google Review">
+                                </div>
+                                <div class="d-testi">
+                                    Hosted a 20-person team dinner at Baresto after reaching out through their contact page. Custom tasting menu, smooth pacing, and zero stress from start to finish.
+                                </div>
+                                <div class="d-testi-by">Hannah Kim<span>Corporate Event &middot; Jan 2026</span></div>
+                                <div class="d-stars">
+                                    <img src="images/google-stars.webp" alt="5 out of 5 stars">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="de-review-app h-100">
+                                <div class="d-logo">
+                                    <img src="images/trustpilot.webp" alt="Trustpilot Review">
+                                </div>
+                                <div class="d-testi">
+                                    Right near Southern Cross Station, yet inside feels like a quiet brass-and-walnut retreat. The smoked old fashioned and truffle rigatoni keep us coming back.
+                                </div>
+                                <div class="d-testi-by">Oliver Grant<span>Evening Cocktails &middot; Dec 2025</span></div>
+                                <div class="d-stars">
+                                    <img src="images/trustpilot-stars.webp" alt="5 out of 5 stars">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- testimonials section close -->
+
+        </div>
+        <!-- content close -->
+
+        <!-- footer begin -->
+        <footer>
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <img class="logo" src="images/logo.webp" alt="Baresto">
+                        <p class="footer-desc">At Baresto, we craft specialty single-origin coffee, wood-fired dishes, and artisan pastries with warm hospitality since 2008.</p>
+                        <div class="social-icons">
+                            <a href="404.html"><i class="fa fa-facebook fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-rss fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-google-plus fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-skype fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-dribbble fa-lg"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="menu.html">Our Menu</a></li>
+                            <li><a href="booking.html">Book a Table</a></li>
+                            <li><a href="about.html">Our Story &amp; Chefs</a></li>
+                            <li><a href="gallery.html">Photo Gallery</a></li>
+                            <li><a href="blog.html">Latest Journal</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center footer-contact">
+                        <h3>Our Location</h3>
+                        <p>Collins Street West, Victoria 8007 Australia</p>
+                        <p>T. (208) 333 9296</p>
+                        <p>E. <a href="mailto:contact@baresto.com">contact@baresto.com</a></p>
+                        <div class="footer-hours">
+                            <strong>Opening Hours</strong><br>
+                            Mon - Thu: 10:30AM - 9:30PM<br>
+                            Friday: 10:00AM - 10:30PM<br>
+                            Sat - Sun: 09:30AM - 11:00PM
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <h3>Newsletter</h3>
+                        <p class="footer-desc">Subscribe for seasonal menu launches, chef tasting nights, and special offers.</p>
+                        <form class="footer-newsletter" action="#" method="post">
+                            <input type="email" placeholder="Your Email" required>
+                            <button type="submit">Join</button>
+                        </form>
+                        <div class="footer-newsletter-msg" role="status" aria-live="polite"></div>
+                        <a href="404.html" class="btn-line mt-2">Reserve a Table</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 sm-text-center">
+                            &copy; Copyright 2026 - Baresto Cafe, Bar &amp; Restaurant. All Rights Reserved.
+                        </div>
+                        <div class="col-md-6 text-md-end sm-text-center subfooter-links">
+                            <a href="about.html">Our Story</a>
+                            <a href="booking.html">Reservation Policy</a>
+                            <a href="contact.html">Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
+
+        <div id="preloader">
+            <div class="preloader1"></div>
+        </div>
+    </div>
+
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="js/plugins.js"></script>
+    <script src="js/designesia.js"></script>
+    <script>
+        jQuery(function ($) {
+            $('#contact_form').on('submit', function (e) {
+                e.preventDefault();
+                var name = $.trim($('#name').val());
+                var email = $.trim($('#email').val());
+                var phone = $.trim($('#phone').val());
+                var message = $.trim($('#message').val());
+                var feedback = $('#contact_feedback');
+
+                $('#name, #email, #phone, #message').removeClass('error_input');
+                feedback.stop(true, true).removeClass('error').hide();
+
+                if (!name || !email || !phone || !message) {
+                    if (!name) $('#name').addClass('error_input');
+                    if (!email) $('#email').addClass('error_input');
+                    if (!phone) $('#phone').addClass('error_input');
+                    if (!message) $('#message').addClass('error_input');
+                    feedback.addClass('error').text('Please fill in all fields before submitting.').fadeIn();
+                    return;
+                }
+
+                if (window.validateBarestoContactFields && !window.validateBarestoContactFields($('#name'), $('#phone'), feedback)) {
+                    return;
+                }
+
+                feedback.stop(true, true).text('Thank you! Your message has been sent.').fadeIn();
+                this.reset();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

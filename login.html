@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/icon.webp" type="image/webp" sizes="16x16">
+    <title>Login - Stackly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/coloring.css" type="text/css">
+    <link rel="stylesheet" href="css/cream.css" type="text/css" id="colors">
+    <link rel="stylesheet" href="css/03_custom.css" type="text/css">
+</head>
+
+<body class="dark-scheme auth-page">
+    <div id="wrapper">
+        <main class="auth-section">
+            <div class="auth-card">
+                <a href="index.html" class="auth-brand">
+                    <img src="images/logo.webp" alt="Stackly">
+                </a>
+                <h2>Welcome Back</h2>
+                <p class="auth-subtitle">Sign in with any valid email, strong password, and select your role dashboard.</p>
+
+                <div class="auth-feedback" id="login_feedback" role="status" aria-live="polite"></div>
+
+                <form id="login_form" novalidate>
+                    <div class="auth-field">
+                        <label>Select Role Dashboard</label>
+                        <div class="role-grid">
+                            <div class="role-option">
+                                <input type="radio" name="role" id="role_admin" value="admin" checked>
+                                <label class="role-label" for="role_admin"><i class="fa fa-shield"></i><span>Admin</span></label>
+                            </div>
+                            <div class="role-option">
+                                <input type="radio" name="role" id="role_chef" value="chef">
+                                <label class="role-label" for="role_chef"><i class="fa fa-cutlery"></i><span>Chef</span></label>
+                            </div>
+                            <div class="role-option">
+                                <input type="radio" name="role" id="role_customer" value="customer">
+                                <label class="role-label" for="role_customer"><i class="fa fa-user"></i><span>Customer</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="login_email">Email Address</label>
+                        <input type="email" id="login_email" name="email" class="form-control" placeholder="you@example.com" autocomplete="email" required>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="login_password">Password</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="login_password" name="password" class="form-control" placeholder="Enter strong password" autocomplete="current-password" required>
+                            <button type="button" class="pw-toggle" data-target="login_password" aria-label="Toggle password visibility">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                        <ul class="pw-checklist" id="login_pw_rules">
+                            <li data-rule="minLen"><i class="fa fa-circle-o"></i> Min 8 characters</li>
+                            <li data-rule="upper"><i class="fa fa-circle-o"></i> Uppercase (A-Z)</li>
+                            <li data-rule="lower"><i class="fa fa-circle-o"></i> Lowercase (a-z)</li>
+                            <li data-rule="number"><i class="fa fa-circle-o"></i> Number (0-9)</li>
+                            <li data-rule="symbol"><i class="fa fa-circle-o"></i> Symbol (!@#$...)</li>
+                        </ul>
+                    </div>
+
+                    <button type="submit" class="auth-submit-btn">Login to Dashboard</button>
+                </form>
+
+                <div class="auth-footer-links">
+                    <span>New here? <a href="register.html">Register</a></span>
+                    <a href="index.html"><i class="fa fa-home"></i> Return to Home</a>
+                </div>
+            </div>
+        </main>
+
+        <div id="preloader">
+            <div class="preloader1"></div>
+        </div>
+    </div>
+
+    <script src="js/plugins.js"></script>
+    <script src="js/designesia.js"></script>
+    <script>
+        jQuery(function ($) {
+            var $email = $('#login_email');
+            var $pw = $('#login_password');
+            var $fb = $('#login_feedback');
+            var prefillName = '';
+
+            window.StacklyAuth.bindPasswordUI($pw, $('#login_pw_rules'), $('#login_form'));
+
+            try {
+                var pre = JSON.parse(localStorage.getItem('stackly_registered_prefill') || 'null');
+                if (pre && pre.email) {
+                    $email.val(pre.email);
+                    if (pre.role) {
+                        $('input[name="role"][value="' + pre.role + '"]').prop('checked', true);
+                    }
+                    prefillName = pre.name || '';
+                    if (window.location.search.indexOf('registered=1') !== -1) {
+                        $fb.removeClass('error').text('Account registered! Enter your password to open your dashboard.').fadeIn();
+                    }
+                }
+            } catch (err) {}
+
+            $('#login_form').on('submit', function (e) {
+                e.preventDefault();
+                var email = $.trim($email.val());
+                var password = $pw.val() || '';
+                var role = $('input[name="role"]:checked').val() || 'customer';
+
+                $email.removeClass('error_input');
+                $pw.removeClass('error_input');
+                $fb.stop(true, true).removeClass('error').hide();
+
+                if (!window.StacklyAuth.isValidEmail(email)) {
+                    $email.addClass('error_input');
+                    $fb.addClass('error').text('Please enter a valid email address.').fadeIn();
+                    return;
+                }
+
+                var pwCheck = window.StacklyAuth.checkPassword(password);
+                if (!pwCheck.valid) {
+                    $pw.addClass('error_input');
+                    $fb.addClass('error').text('Password must be 8+ characters with uppercase, lowercase, number, and symbol.').fadeIn();
+                    return;
+                }
+
+                localStorage.removeItem('stackly_registered_prefill');
+                window.StacklyAuth.login(email, role, prefillName);
+                window.location.href = 'dashboard.html';
+            });
+        });
+    </script>
+</body>
+
+</html>
+

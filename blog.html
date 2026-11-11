@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/icon.webp" type="image/webp" sizes="16x16">
+    <title>Blog - Baresto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <!-- CSS Files
+    ================================================== -->
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/coloring.css" type="text/css">
+
+    <!-- css for scheme color -->
+    <link rel="stylesheet" href="css/cream.css" type="text/css" id="colors">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/03_custom.css" type="text/css">
+
+    <style>
+        .wow {
+            visibility: visible !important;
+        }
+
+        #subheader {
+            position: relative;
+        }
+
+        #subheader h1 {
+            float: none;
+            margin: 0 0 12px 0;
+            padding: 0;
+            border: none;
+            display: block;
+            font-family: var(--title-font);
+            font-size: 48px;
+            font-weight: var(--title-font-weight);
+            letter-spacing: -.015em;
+            line-height: 1.2;
+            text-transform: none;
+            color: #ffffff;
+        }
+
+        #subheader .breadcrumb {
+            margin-top: 12px;
+            margin-bottom: 0;
+        }
+
+        .blog-list .blog-entry {
+            margin-bottom: 70px;
+        }
+
+        .blog-list .blog-entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .blog-list .post-content {
+            position: relative;
+        }
+
+        .blog-list h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 20px;
+            line-height: 1.35;
+        }
+
+        .blog-list h3 a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .blog-list h3 a:hover {
+            color: var(--primary-color);
+        }
+
+        .blog-list .post-text p {
+            margin-bottom: 24px;
+        }
+
+        .blog-list .btn-line {
+            padding: 6px 28px;
+            white-space: nowrap;
+        }
+
+        .blog-post-img {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            display: block;
+        }
+
+        .modal-content.blog-modal {
+            background-color: #18191b;
+            color: var(--body-font-color-dark);
+            border: 1px solid rgba(227, 192, 134, 0.35);
+        }
+
+        .modal-content.blog-modal .modal-header {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-content.blog-modal .modal-title {
+            color: #ffffff;
+            font-family: var(--title-font);
+        }
+
+        @media only screen and (max-width: 992px) {
+            header.transparent:not(.bg-dark) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: transparent !important;
+                background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 100%);
+            }
+
+            #subheader {
+                padding: 95px 0 35px 0;
+            }
+
+            #subheader h1 {
+                font-size: 38px;
+                margin: 0 0 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-scheme">
+
+    <div id="wrapper">
+
+        <!-- header begin -->
+        <header class="header_center transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- logo begin -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img class="logo logo_dark_bg" src="images/logo.webp" alt="">
+                                <img class="logo logo_light_bg" src="images/logo.webp" alt="">
+                            </a>
+                        </div>
+                        <!-- logo close -->
+
+                        <!-- small button begin -->
+                        <span id="menu-btn"></span>
+                        <!-- small button close -->
+
+                        <!-- mainmenu begin -->
+                        <nav>
+                            <ul id="mainmenu">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="menu.html">menu</a></li>
+                                <li><a href="booking.html">Booking</a></li>
+                                <li><a href="about.html">About</a>
+                                    <ul>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="gallery.html">Gallery</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="blog.html" class="active" aria-current="page">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- mainmenu close -->
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+
+        <!-- content begin -->
+        <div id="content" class="no-bottom no-top">
+
+            <!-- subheader begin -->
+            <section id="subheader" class="jarallax text-light">
+                <img src="images/bg-6.webp" class="jarallax-img" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h5 class="uptitle">Latest</h5>
+                            <h1>Blog</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- subheader close -->
+
+            <!-- blog section begin -->
+            <section>
+                <div class="container">
+                    <div class="blog-list">
+
+                        <!-- post 1 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">28</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="10 Reasons To Drink Coffee Every Day" data-date="28 MAY" data-img="images/1.webp">10 Reasons To Drink Coffee Every Day</a></h3>
+                                        <p>Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant. The genus Coffea is native to tropical Africa (specifically having its origin in Ethiopia and Sudan) and Madagascar, the Comoros, Mauritius, and Réunion in the Indian Ocean.</p>
+                                        <a href="404.html" class="btn-line" data-title="10 Reasons To Drink Coffee Every Day" data-date="28 MAY" data-img="images/1.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/1.webp" class="blog-post-img" alt="Morning coffee and pastries">
+                            </div>
+                        </div>
+
+                        <!-- post 2 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">26</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="10 Reasons To Drink Coffee Every Day" data-date="26 MAY" data-img="images/bg-side-3.webp">10 Reasons To Drink Coffee Every Day</a></h3>
+                                        <p>Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant. The genus Coffea is native to tropical Africa (specifically having its origin in Ethiopia and Sudan) and Madagascar, the Comoros, Mauritius, and Réunion in the Indian Ocean.</p>
+                                        <a href="404.html" class="btn-line" data-title="10 Reasons To Drink Coffee Every Day" data-date="26 MAY" data-img="images/bg-side-3.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/bg-side-3.webp" class="blog-post-img" alt="Guests enjoying cafe dining">
+                            </div>
+                        </div>
+
+                        <!-- post 3 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">24</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="10 Reasons To Drink Coffee Every Day" data-date="24 MAY" data-img="images/4.webp">10 Reasons To Drink Coffee Every Day</a></h3>
+                                        <p>Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant. The genus Coffea is native to tropical Africa (specifically having its origin in Ethiopia and Sudan) and Madagascar, the Comoros, Mauritius, and Réunion in the Indian Ocean.</p>
+                                        <a href="404.html" class="btn-line" data-title="10 Reasons To Drink Coffee Every Day" data-date="24 MAY" data-img="images/4.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/4.webp" class="blog-post-img" alt="Latte cup surrounded by roasted beans">
+                            </div>
+                        </div>
+
+                        <!-- post 4 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">22</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="10 Reasons To Drink Coffee Every Day" data-date="22 MAY" data-img="images/bg-side-1.webp">10 Reasons To Drink Coffee Every Day</a></h3>
+                                        <p>Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant. The genus Coffea is native to tropical Africa (specifically having its origin in Ethiopia and Sudan) and Madagascar, the Comoros, Mauritius, and Réunion in the Indian Ocean.</p>
+                                        <a href="404.html" class="btn-line" data-title="10 Reasons To Drink Coffee Every Day" data-date="22 MAY" data-img="images/bg-side-1.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/bg-side-1.webp" class="blog-post-img" alt="Espresso and cookie on wooden table">
+                            </div>
+                        </div>
+
+                        <!-- post 5 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">20</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="The Art of Selecting Single-Origin Beans" data-date="20 MAY" data-img="images/bg-6.webp">The Art of Selecting Single-Origin Beans</a></h3>
+                                        <p>High-altitude harvests bring vibrant citrus, floral jasmine, and cocoa notes to your cup. Discover how our green-coffee buyers partner directly with small estates to roast each origin to its sweet spot.</p>
+                                        <a href="404.html" class="btn-line" data-title="The Art of Selecting Single-Origin Beans" data-date="20 MAY" data-img="images/bg-6.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/bg-6.webp" class="blog-post-img" alt="Moka pot coffee and open book">
+                            </div>
+                        </div>
+
+                        <!-- post 6 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">18</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Pairing Artisan Breads With Morning Espresso" data-date="18 MAY" data-img="images/bg-side-2.webp">Pairing Artisan Breads With Morning Espresso</a></h3>
+                                        <p>From warm garlic butter loaves to freshly toasted brioche sandwiches, crisp crusts and tender crumbs bring out the rich caramel body of a balanced double espresso.</p>
+                                        <a href="404.html" class="btn-line" data-title="Pairing Artisan Breads With Morning Espresso" data-date="18 MAY" data-img="images/bg-side-2.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/bg-side-2.webp" class="blog-post-img" alt="Toasted artisan sandwich on wooden board">
+                            </div>
+                        </div>
+
+                        <!-- post 7 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">16</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Behind the Pass: Crafting Our Signature Plates" data-date="16 MAY" data-img="images/5.webp">Behind the Pass: Crafting Our Signature Plates</a></h3>
+                                        <p>Step inside the Baresto kitchen as our chefs slow-simmer herb reductions, char seasonal vegetables over open flame, and plate every dish to order.</p>
+                                        <a href="404.html" class="btn-line" data-title="Behind the Pass: Crafting Our Signature Plates" data-date="16 MAY" data-img="images/5.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/5.webp" class="blog-post-img" alt="Chef plating signature dish">
+                            </div>
+                        </div>
+
+                        <!-- post 8 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">14</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Weekend Brunch Favorites You Need to Try" data-date="14 MAY" data-img="images/slide-2.webp">Weekend Brunch Favorites You Need to Try</a></h3>
+                                        <p>Savor seared garlic shrimp, herb-roasted potatoes, and wood-fired chicken pizzas alongside velvety cappuccinos every Saturday and Sunday morning.</p>
+                                        <a href="404.html" class="btn-line" data-title="Weekend Brunch Favorites You Need to Try" data-date="14 MAY" data-img="images/slide-2.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/slide-2.webp" class="blog-post-img" alt="Brunch dishes spread on rustic table">
+                            </div>
+                        </div>
+
+                        <!-- post 9 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">12</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="How Roast Profiles Shape Aroma and Crema" data-date="12 MAY" data-img="images/2.webp">How Roast Profiles Shape Aroma and Crema</a></h3>
+                                        <p>Even thirty seconds in the roaster drum changes sweetness, acidity, and mouthfeel. Explore how our head roaster dials in light, medium, and dark profiles.</p>
+                                        <a href="404.html" class="btn-line" data-title="How Roast Profiles Shape Aroma and Crema" data-date="12 MAY" data-img="images/2.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/2.webp" class="blog-post-img" alt="Roasted dinner feast and table spread">
+                            </div>
+                        </div>
+
+                        <!-- post 10 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">10</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Sweet Moments: Baking Fresh Pastries Daily" data-date="10 MAY" data-img="images/slide-1.webp">Sweet Moments: Baking Fresh Pastries Daily</a></h3>
+                                        <p>Before sunrise, our pastry ovens fill with warm plum crumble tarts, butter croissants, and chocolate-dipped treats crafted to pair with your favorite brew.</p>
+                                        <a href="404.html" class="btn-line" data-title="Sweet Moments: Baking Fresh Pastries Daily" data-date="10 MAY" data-img="images/slide-1.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/slide-1.webp" class="blog-post-img" alt="Freshly baked crumble tart and coffee">
+                            </div>
+                        </div>
+
+                        <!-- post 11 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">08</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Hosting Memorable Gatherings at Baresto" data-date="08 MAY" data-img="images/3.webp">Hosting Memorable Gatherings at Baresto</a></h3>
+                                        <p>Whether celebrating a milestone birthday or an intimate dinner with friends, our hospitality team designs custom menus and welcoming table settings.</p>
+                                        <a href="404.html" class="btn-line" data-title="Hosting Memorable Gatherings at Baresto" data-date="08 MAY" data-img="images/3.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/3.webp" class="blog-post-img" alt="Guests celebrating a birthday together">
+                            </div>
+                        </div>
+
+                        <!-- post 12 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">06</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Why Slow Mornings Taste Better With Pour-Over" data-date="06 MAY" data-img="images/1.webp">Why Slow Mornings Taste Better With Pour-Over</a></h3>
+                                        <p>Take five unhurried minutes to watch bloom, aroma, and clarity unfold in a hand-poured carafe crafted to highlight delicate single-estate flavors.</p>
+                                        <a href="404.html" class="btn-line" data-title="Why Slow Mornings Taste Better With Pour-Over" data-date="06 MAY" data-img="images/1.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/1.webp" class="blog-post-img" alt="Morning lattes and cake slice">
+                            </div>
+                        </div>
+
+                        <!-- post 13 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">04</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Cold Brew vs. Iced Espresso: What's the Difference?" data-date="04 MAY" data-img="images/4.webp">Cold Brew vs. Iced Espresso: What's the Difference?</a></h3>
+                                        <p>Steeped slow in cold water for 18 hours versus pulled hot over ice, each chilled brew unlocks distinct chocolatey body or vibrant citrus brightness.</p>
+                                        <a href="404.html" class="btn-line" data-title="Cold Brew vs. Iced Espresso: What's the Difference?" data-date="04 MAY" data-img="images/4.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/4.webp" class="blog-post-img" alt="Espresso cup on coffee beans">
+                            </div>
+                        </div>
+
+                        <!-- post 14 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">02</div>
+                                        <div class="month">MAY</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Inside Our Spice Blend for Autumn Plum Crumble" data-date="02 MAY" data-img="images/slide-1.webp">Inside Our Spice Blend for Autumn Plum Crumble</a></h3>
+                                        <p>Ceylon cinnamon, toasted nutmeg, and brown-butter oats turn orchard plums into our most requested warm dessert alongside a classic cappuccino.</p>
+                                        <a href="404.html" class="btn-line" data-title="Inside Our Spice Blend for Autumn Plum Crumble" data-date="02 MAY" data-img="images/slide-1.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/slide-1.webp" class="blog-post-img" alt="Plum crumble tart and coffee cups">
+                            </div>
+                        </div>
+
+                        <!-- post 15 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">30</div>
+                                        <div class="month">APR</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Meet the Farmers Behind Our Ethiopian Harvest" data-date="30 APR" data-img="images/bg-6.webp">Meet the Farmers Behind Our Ethiopian Harvest</a></h3>
+                                        <p>Highland washing stations in Yirgacheffe hand-sort ripe cherries under mountain sun, giving our filter coffees their jasmine and bergamot finish.</p>
+                                        <a href="404.html" class="btn-line" data-title="Meet the Farmers Behind Our Ethiopian Harvest" data-date="30 APR" data-img="images/bg-6.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/bg-6.webp" class="blog-post-img" alt="Moka pot coffee preparation">
+                            </div>
+                        </div>
+
+                        <!-- post 16 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">28</div>
+                                        <div class="month">APR</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Five Secrets to Crispy Wood-Fired Pizza Crust" data-date="28 APR" data-img="images/slide-2.webp">Five Secrets to Crispy Wood-Fired Pizza Crust</a></h3>
+                                        <p>A 48-hour cold ferment, stone-milled flour, and blazing deck heat create an airy blistered crust that holds juicy grilled toppings effortlessly.</p>
+                                        <a href="404.html" class="btn-line" data-title="Five Secrets to Crispy Wood-Fired Pizza Crust" data-date="28 APR" data-img="images/slide-2.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/slide-2.webp" class="blog-post-img" alt="Freshly plated dinner spread">
+                            </div>
+                        </div>
+
+                        <!-- post 17 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">26</div>
+                                        <div class="month">APR</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Why Freshly Ground Whole Grains Transform Bread" data-date="26 APR" data-img="images/bg-side-2.webp">Why Freshly Ground Whole Grains Transform Bread</a></h3>
+                                        <p>Stone-ground wheat retains natural bran oils and toasted nuttiness, making every slice of our brown and sandwich bread deeply flavorful.</p>
+                                        <a href="404.html" class="btn-line" data-title="Why Freshly Ground Whole Grains Transform Bread" data-date="26 APR" data-img="images/bg-side-2.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/bg-side-2.webp" class="blog-post-img" alt="Toasted sandwich loaf on board">
+                            </div>
+                        </div>
+
+                        <!-- post 18 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">24</div>
+                                        <div class="month">APR</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Creating the Perfect Afternoon Coffee &amp; Cookie Ritual" data-date="24 APR" data-img="images/bg-side-1.webp">Creating the Perfect Afternoon Coffee &amp; Cookie Ritual</a></h3>
+                                        <p>A crisp-edged dark chocolate cookie dipped beside a rich latte turns a busy afternoon break into a small daily luxury.</p>
+                                        <a href="404.html" class="btn-line" data-title="Creating the Perfect Afternoon Coffee &amp; Cookie Ritual" data-date="24 APR" data-img="images/bg-side-1.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/bg-side-1.webp" class="blog-post-img" alt="Lattes and chocolate chip cookie">
+                            </div>
+                        </div>
+
+                        <!-- post 19 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">22</div>
+                                        <div class="month">APR</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Seasonal Menu Tasting Notes With Chef Myra Welsh" data-date="22 APR" data-img="images/2.webp">Seasonal Menu Tasting Notes With Chef Myra Welsh</a></h3>
+                                        <p>Chef Myra shares how charred market produce, slow-roasted poultry, and aromatic herb infusions come together on our seasonal tasting menu.</p>
+                                        <a href="404.html" class="btn-line" data-title="Seasonal Menu Tasting Notes With Chef Myra Welsh" data-date="22 APR" data-img="images/2.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/2.webp" class="blog-post-img" alt="Roasted dinner platter">
+                            </div>
+                        </div>
+
+                        <!-- post 20 -->
+                        <div class="row g-4 align-items-center blog-entry">
+                            <div class="col-md-6 order-md-2">
+                                <div class="post-content">
+                                    <div class="date-box">
+                                        <div class="day">20</div>
+                                        <div class="month">APR</div>
+                                    </div>
+                                    <div class="post-text">
+                                        <h3><a href="#" class="blog-open" data-title="Designing Warm Lighting &amp; Acoustic Comfort for Cafés" data-date="20 APR" data-img="images/bg-side-3.webp">Designing Warm Lighting &amp; Acoustic Comfort for Cafés</a></h3>
+                                        <p>Soft amber pendants, timber tables, and thoughtful seating spacing create an inviting hum where conversation flows effortlessly.</p>
+                                        <a href="404.html" class="btn-line" data-title="Designing Warm Lighting &amp; Acoustic Comfort for Cafés" data-date="20 APR" data-img="images/bg-side-3.webp">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1">
+                                <img src="images/bg-side-3.webp" class="blog-post-img" alt="Guests enjoying warm atmosphere">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <!-- blog section close -->
+
+        </div>
+        <!-- content close -->
+
+        <!-- article modal -->
+        <div class="modal fade" id="blogModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content blog-modal">
+                    <div class="modal-header">
+                        <div>
+                            <div class="id-color-2 small text-uppercase" id="blogModalDate"></div>
+                            <h4 class="modal-title" id="blogModalTitle"></h4>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="blogModalImg" src="images/1.webp" class="blog-post-img mb-4" alt="">
+                        <p id="blogModalExcerpt"></p>
+                        <p class="mb-0">At Baresto, our roasters and chefs craft every batch and dish to highlight fresh ingredients, balanced flavors, and warm hospitality.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer begin -->
+        <footer>
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <img class="logo" src="images/logo.webp" alt="Baresto">
+                        <p class="footer-desc">At Baresto, we craft specialty single-origin coffee, wood-fired dishes, and artisan pastries with warm hospitality since 2008.</p>
+                        <div class="social-icons">
+                            <a href="404.html"><i class="fa fa-facebook fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-rss fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-google-plus fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-skype fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-dribbble fa-lg"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="menu.html">Our Menu</a></li>
+                            <li><a href="booking.html">Book a Table</a></li>
+                            <li><a href="about.html">Our Story &amp; Chefs</a></li>
+                            <li><a href="gallery.html">Photo Gallery</a></li>
+                            <li><a href="blog.html">Latest Journal</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center footer-contact">
+                        <h3>Our Location</h3>
+                        <p>Collins Street West, Victoria 8007 Australia</p>
+                        <p>T. (208) 333 9296</p>
+                        <p>E. <a href="mailto:contact@baresto.com">contact@baresto.com</a></p>
+                        <div class="footer-hours">
+                            <strong>Opening Hours</strong><br>
+                            Mon - Thu: 10:30AM - 9:30PM<br>
+                            Friday: 10:00AM - 10:30PM<br>
+                            Sat - Sun: 09:30AM - 11:00PM
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <h3>Newsletter</h3>
+                        <p class="footer-desc">Subscribe for seasonal menu launches, chef tasting nights, and special offers.</p>
+                        <form class="footer-newsletter" action="#" method="post">
+                            <input type="email" placeholder="Your Email" required>
+                            <button type="submit">Join</button>
+                        </form>
+                        <div class="footer-newsletter-msg" role="status" aria-live="polite"></div>
+                        <a href="404.html" class="btn-line mt-2">Reserve a Table</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 sm-text-center">
+                            &copy; Copyright 2026 - Baresto Cafe, Bar &amp; Restaurant. All Rights Reserved.
+                        </div>
+                        <div class="col-md-6 text-md-end sm-text-center subfooter-links">
+                            <a href="about.html">Our Story</a>
+                            <a href="booking.html">Reservation Policy</a>
+                            <a href="contact.html">Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
+
+        <div id="preloader">
+            <div class="preloader1"></div>
+        </div>
+    </div>
+
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="js/plugins.js"></script>
+    <script src="js/designesia.js"></script>
+    <script>
+        jQuery(function ($) {
+            $('.blog-open').on('click', function (e) {
+                e.preventDefault();
+                $('#blogModalTitle').text($(this).data('title'));
+                $('#blogModalDate').text($(this).data('date'));
+                $('#blogModalImg').attr('src', $(this).data('img'));
+                $('#blogModalExcerpt').text($(this).closest('.post-text').find('p').text());
+                if (window.bootstrap && bootstrap.Modal) {
+                    bootstrap.Modal.getOrCreateInstance(document.getElementById('blogModal')).show();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+

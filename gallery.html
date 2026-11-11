@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/icon.webp" type="image/webp" sizes="16x16">
+    <title>Gallery - Baresto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <!-- CSS Files
+    ================================================== -->
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/coloring.css" type="text/css">
+
+    <!-- css for scheme color -->
+    <link rel="stylesheet" href="css/cream.css" type="text/css" id="colors">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/03_custom.css" type="text/css">
+
+    <style>
+        .wow {
+            visibility: visible !important;
+        }
+
+        #subheader {
+            position: relative;
+        }
+
+        #subheader h1 {
+            float: none;
+            margin: 0 0 12px 0;
+            padding: 0;
+            border: none;
+            display: block;
+            font-family: var(--title-font);
+            font-size: 48px;
+            font-weight: var(--title-font-weight);
+            letter-spacing: -.015em;
+            line-height: 1.2;
+            text-transform: none;
+            color: #ffffff;
+        }
+
+        #subheader .breadcrumb {
+            margin-top: 12px;
+            margin-bottom: 0;
+        }
+
+        #filters {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #filters a {
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 8px 20px;
+            display: inline-block;
+            margin: 4px;
+            transition: all 0.25s ease;
+        }
+
+        #filters li a.selected {
+            color: #18191b;
+        }
+
+        .gallery-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            display: block;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s ease;
+        }
+
+        .item.chefs .gallery-card img {
+            object-position: center 20%;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.08) 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 18px 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-card:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        .gallery-caption span {
+            color: #ffffff;
+            font-family: var(--title-font);
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        @media only screen and (max-width: 992px) {
+            header.transparent:not(.bg-dark) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: transparent !important;
+                background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 100%);
+            }
+
+            #subheader {
+                padding: 95px 0 35px 0;
+            }
+
+            #subheader h1 {
+                font-size: 38px;
+                margin: 0 0 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-scheme">
+
+    <div id="wrapper">
+
+        <!-- header begin -->
+        <header class="header_center transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- logo begin -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img class="logo logo_dark_bg" src="images/logo.webp" alt="">
+                                <img class="logo logo_light_bg" src="images/logo.webp" alt="">
+                            </a>
+                        </div>
+                        <!-- logo close -->
+
+                        <!-- small button begin -->
+                        <span id="menu-btn"></span>
+                        <!-- small button close -->
+
+                        <!-- mainmenu begin -->
+                        <nav>
+                            <ul id="mainmenu">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="menu.html">menu</a></li>
+                                <li><a href="booking.html">Booking</a></li>
+                                <li><a href="about.html" class="active">About</a>
+                                    <ul>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="gallery.html" class="active" aria-current="page">Gallery</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- mainmenu close -->
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+
+        <!-- content begin -->
+        <div id="content" class="no-bottom no-top">
+
+            <!-- subheader begin -->
+            <section id="subheader" class="jarallax text-light">
+                <img src="images/slide-2.webp" class="jarallax-img" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h5 class="uptitle">Discover</h5>
+                            <h1>Gallery</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Gallery</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- subheader close -->
+
+            <!-- gallery section begin -->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul id="filters">
+                                <li><a href="#" data-filter="*" class="selected">All</a></li>
+                                <li><a href="#" data-filter=".coffee">Coffee</a></li>
+                                <li><a href="#" data-filter=".foods">Foods</a></li>
+                                <li><a href="#" data-filter=".moments">Moments</a></li>
+                                <li><a href="#" data-filter=".chefs">Chefs</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="gallery" class="row g-4 zoom-gallery">
+                        <div class="col-lg-4 col-md-6 item coffee">
+                            <a href="images/bg-side-1.webp" class="gallery-card" title="Specialty Latte &amp; Cookie">
+                                <img src="images/bg-side-1.webp" alt="Specialty Latte and Cookie">
+                                <div class="gallery-caption"><span>Specialty Latte &amp; Cookie</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item foods">
+                            <a href="images/2.webp" class="gallery-card" title="Signature Roast Feast">
+                                <img src="images/2.webp" alt="Signature Roast Feast">
+                                <div class="gallery-caption"><span>Signature Roast Feast</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item coffee">
+                            <a href="images/4.webp" class="gallery-card" title="Artisan Espresso">
+                                <img src="images/4.webp" alt="Artisan Espresso">
+                                <div class="gallery-caption"><span>Artisan Espresso</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item foods">
+                            <a href="images/bg-side-2.webp" class="gallery-card" title="Toasted Gourmet Sandwich">
+                                <img src="images/bg-side-2.webp" alt="Toasted Gourmet Sandwich">
+                                <div class="gallery-caption"><span>Toasted Gourmet Sandwich</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item moments">
+                            <a href="images/bg-side-3.webp" class="gallery-card" title="Warm Hospitality">
+                                <img src="images/bg-side-3.webp" alt="Warm Hospitality">
+                                <div class="gallery-caption"><span>Warm Hospitality</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item foods">
+                            <a href="images/5.webp" class="gallery-card" title="Chef's Plating">
+                                <img src="images/5.webp" alt="Chef's Plating">
+                                <div class="gallery-caption"><span>Chef's Plating</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item coffee">
+                            <a href="images/1.webp" class="gallery-card" title="Morning Brew &amp; Cake">
+                                <img src="images/1.webp" alt="Morning Brew and Cake">
+                                <div class="gallery-caption"><span>Morning Brew &amp; Cake</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item moments">
+                            <a href="images/slide-1.webp" class="gallery-card" title="Freshly Baked Pastries">
+                                <img src="images/slide-1.webp" alt="Freshly Baked Pastries">
+                                <div class="gallery-caption"><span>Freshly Baked Pastries</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item moments">
+                            <a href="images/3.webp" class="gallery-card" title="Celebration Moments">
+                                <img src="images/3.webp" alt="Celebration Moments">
+                                <div class="gallery-caption"><span>Celebration Moments</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item coffee">
+                            <a href="images/bg-6.webp" class="gallery-card" title="Moka Pot Ritual">
+                                <img src="images/bg-6.webp" alt="Moka Pot Ritual">
+                                <div class="gallery-caption"><span>Moka Pot Ritual</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item foods">
+                            <a href="images/slide-2.webp" class="gallery-card" title="Garlic Herb Shrimp Platter">
+                                <img src="images/slide-2.webp" alt="Garlic Herb Shrimp Platter">
+                                <div class="gallery-caption"><span>Garlic Herb Shrimp Platter</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item chefs">
+                            <a href="images/1_1.webp" class="gallery-card" title="Chef Fynley Wilkinson">
+                                <img src="images/1_1.webp" alt="Chef Fynley Wilkinson">
+                                <div class="gallery-caption"><span>Chef Fynley Wilkinson</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item chefs">
+                            <a href="images/2_1.webp" class="gallery-card" title="Chef Myra Welsh">
+                                <img src="images/2_1.webp" alt="Chef Myra Welsh">
+                                <div class="gallery-caption"><span>Chef Myra Welsh</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item chefs">
+                            <a href="images/3_1.webp" class="gallery-card" title="Chef Aysha Shepard">
+                                <img src="images/3_1.webp" alt="Chef Aysha Shepard">
+                                <div class="gallery-caption"><span>Chef Aysha Shepard</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item chefs">
+                            <a href="images/4_1.webp" class="gallery-card" title="Chef Robyn Peel">
+                                <img src="images/4_1.webp" alt="Chef Robyn Peel">
+                                <div class="gallery-caption"><span>Chef Robyn Peel</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item foods">
+                            <a href="images/slide-1.webp" class="gallery-card" title="Plum Crumble Tart">
+                                <img src="images/slide-1.webp" alt="Plum Crumble Tart" style="object-position: 65% 40%;">
+                                <div class="gallery-caption"><span>Plum Crumble Tart</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item coffee">
+                            <a href="images/bg-side-1.webp" class="gallery-card" title="Velvety Flat White">
+                                <img src="images/bg-side-1.webp" alt="Velvety Flat White" style="object-position: 35% 75%;">
+                                <div class="gallery-caption"><span>Velvety Flat White</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item coffee">
+                            <a href="images/bg-6.webp" class="gallery-card" title="Espresso &amp; Open Book">
+                                <img src="images/bg-6.webp" alt="Espresso and Open Book" style="object-position: 55% 55%;">
+                                <div class="gallery-caption"><span>Espresso &amp; Open Book</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item foods">
+                            <a href="images/2.webp" class="gallery-card" title="Roasted Garlic &amp; Rosemary">
+                                <img src="images/2.webp" alt="Roasted Garlic and Rosemary" style="object-position: 50% 65%;">
+                                <div class="gallery-caption"><span>Roasted Garlic &amp; Rosemary</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item moments">
+                            <a href="images/bg-side-3.webp" class="gallery-card" title="Laughter Over Dinner">
+                                <img src="images/bg-side-3.webp" alt="Laughter Over Dinner" style="object-position: 50% 25%;">
+                                <div class="gallery-caption"><span>Laughter Over Dinner</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item foods">
+                            <a href="images/slide-2.webp" class="gallery-card" title="Crispy Herb Potatoes">
+                                <img src="images/slide-2.webp" alt="Crispy Herb Potatoes" style="object-position: 85% 60%;">
+                                <div class="gallery-caption"><span>Crispy Herb Potatoes</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item coffee">
+                            <a href="images/4.webp" class="gallery-card" title="Golden Crema Pour">
+                                <img src="images/4.webp" alt="Golden Crema Pour" style="object-position: 50% 45%;">
+                                <div class="gallery-caption"><span>Golden Crema Pour</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item moments">
+                            <a href="images/3.webp" class="gallery-card" title="Candlelit Birthday Wish">
+                                <img src="images/3.webp" alt="Candlelit Birthday Wish" style="object-position: 45% 45%;">
+                                <div class="gallery-caption"><span>Candlelit Birthday Wish</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item foods">
+                            <a href="images/5.webp" class="gallery-card" title="Herb Sauce Finishing">
+                                <img src="images/5.webp" alt="Herb Sauce Finishing" style="object-position: 50% 60%;">
+                                <div class="gallery-caption"><span>Herb Sauce Finishing</span></div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 item coffee">
+                            <a href="images/1.webp" class="gallery-card" title="Double Latte Service">
+                                <img src="images/1.webp" alt="Double Latte Service" style="object-position: 45% 60%;">
+                                <div class="gallery-caption"><span>Double Latte Service</span></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- gallery section close -->
+
+        </div>
+        <!-- content close -->
+
+        <!-- footer begin -->
+        <footer>
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <img class="logo" src="images/logo.webp" alt="Baresto">
+                        <p class="footer-desc">At Baresto, we craft specialty single-origin coffee, wood-fired dishes, and artisan pastries with warm hospitality since 2008.</p>
+                        <div class="social-icons">
+                            <a href="404.html"><i class="fa fa-facebook fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-rss fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-google-plus fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-skype fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-dribbble fa-lg"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="menu.html">Our Menu</a></li>
+                            <li><a href="booking.html">Book a Table</a></li>
+                            <li><a href="about.html">Our Story &amp; Chefs</a></li>
+                            <li><a href="gallery.html">Photo Gallery</a></li>
+                            <li><a href="blog.html">Latest Journal</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center footer-contact">
+                        <h3>Our Location</h3>
+                        <p>Collins Street West, Victoria 8007 Australia</p>
+                        <p>T. (208) 333 9296</p>
+                        <p>E. <a href="mailto:contact@baresto.com">contact@baresto.com</a></p>
+                        <div class="footer-hours">
+                            <strong>Opening Hours</strong><br>
+                            Mon - Thu: 10:30AM - 9:30PM<br>
+                            Friday: 10:00AM - 10:30PM<br>
+                            Sat - Sun: 09:30AM - 11:00PM
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <h3>Newsletter</h3>
+                        <p class="footer-desc">Subscribe for seasonal menu launches, chef tasting nights, and special offers.</p>
+                        <form class="footer-newsletter" action="#" method="post">
+                            <input type="email" placeholder="Your Email" required>
+                            <button type="submit">Join</button>
+                        </form>
+                        <div class="footer-newsletter-msg" role="status" aria-live="polite"></div>
+                        <a href="404.html" class="btn-line mt-2">Reserve a Table</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 sm-text-center">
+                            &copy; Copyright 2026 - Baresto Cafe, Bar &amp; Restaurant. All Rights Reserved.
+                        </div>
+                        <div class="col-md-6 text-md-end sm-text-center subfooter-links">
+                            <a href="about.html">Our Story</a>
+                            <a href="booking.html">Reservation Policy</a>
+                            <a href="contact.html">Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
+
+        <div id="preloader">
+            <div class="preloader1"></div>
+        </div>
+    </div>
+
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="js/plugins.js"></script>
+    <script src="js/designesia.js"></script>
+
+</body>
+
+</html>
+

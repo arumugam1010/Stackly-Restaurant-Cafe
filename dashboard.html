@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/icon.webp" type="image/webp" sizes="16x16">
+    <title>Dashboard - Stackly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/coloring.css" type="text/css">
+    <link rel="stylesheet" href="css/cream.css" type="text/css" id="colors">
+    <link rel="stylesheet" href="css/03_custom.css" type="text/css">
+
+    <style>
+        body.dashboard-page {
+            margin: 0;
+            background: #141416;
+            color: var(--body-font-color-dark);
+            overflow-x: hidden;
+        }
+
+        .dash-layout {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .dash-sidebar {
+            width: 268px;
+            flex-shrink: 0;
+            background: #1a1816;
+            border-right: 1px solid rgba(227, 192, 134, 0.2);
+            display: flex;
+            flex-direction: column;
+            padding: 14px 14px 12px 14px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1040;
+        }
+
+        .dash-sidebar-scroll {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding-right: 2px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(227, 192, 134, 0.35) transparent;
+        }
+
+        .dash-sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .dash-sidebar-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .dash-sidebar-scroll::-webkit-scrollbar-thumb {
+            background: rgba(227, 192, 134, 0.35);
+            border-radius: 4px;
+        }
+
+        .dash-brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px 10px 4px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .dash-brand-row img {
+            height: 24px;
+            width: auto;
+            display: block;
+        }
+
+        .dash-close-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .dash-user-chip {
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(227, 192, 134, 0.08);
+            border: 1px solid rgba(227, 192, 134, 0.24);
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+
+        .dash-role-pill {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 999px;
+            background: var(--primary-color);
+            color: #1f1712;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .dash-user-name {
+            color: #ffffff;
+            font-size: 13.5px;
+            font-weight: 600;
+            line-height: 1.25;
+            word-break: break-word;
+        }
+
+        .dash-user-email {
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 11.5px;
+            line-height: 1.3;
+            margin-top: 2px;
+            word-break: break-all;
+        }
+
+        .dash-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .dash-nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 10px;
+            border-radius: 7px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.35;
+            transition: all 0.2s ease;
+        }
+
+        .dash-nav-item a i {
+            width: 18px;
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+
+        .dash-nav-item a:hover,
+        .dash-nav-item a.active {
+            background: rgba(227, 192, 134, 0.16);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .dash-sidebar-foot {
+            margin-top: 8px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .dash-foot-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 10px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            line-height: 1.3;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            background: transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .dash-foot-link:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .dash-foot-link.logout {
+            border-color: rgba(224, 82, 82, 0.45);
+            color: #ff9c9c;
+        }
+
+        .dash-foot-link.logout:hover {
+            background: rgba(224, 82, 82, 0.14);
+            color: #ffffff;
+        }
+
+        .dash-main {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dash-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            background: rgba(26, 24, 22, 0.94);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(227, 192, 134, 0.18);
+            padding: 14px 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .dash-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .dash-hamburger {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            border: 1px solid rgba(227, 192, 134, 0.38);
+            background: rgba(227, 192, 134, 0.1);
+            color: var(--primary-color);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .dash-page-title {
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            float: none !important;
+            color: #ffffff;
+            font-family: var(--title-font) !important;
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.3px !important;
+            text-transform: none !important;
+            line-height: 1.25 !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dash-topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .dash-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--primary-color);
+            background: rgba(227, 192, 134, 0.12);
+            color: var(--primary-color) !important;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .dash-btn:hover {
+            background: var(--primary-color);
+            color: #1f1712 !important;
+        }
+
+        .dash-btn.primary {
+            background: linear-gradient(135deg, #e3c086 0%, #c48349 100%);
+            color: #1f1712 !important;
+            border-color: transparent;
+        }
+
+        .dash-btn.primary:hover {
+            filter: brightness(1.08);
+        }
+
+        .dash-content {
+            padding: 26px;
+        }
+
+        .dash-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(227, 192, 134, 0.2);
+            border-radius: 12px;
+            padding: 22px;
+            height: 100%;
+        }
+
+        .dash-kpi-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .dash-kpi-value {
+            font-family: var(--title-font);
+            font-size: 30px;
+            color: #ffffff;
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+
+        .dash-kpi-meta {
+            font-size: 12.5px;
+            color: var(--primary-color);
+        }
+
+        .dash-card-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .dash-card-head h4 {
+            margin: 0;
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .dash-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 460px;
+        }
+
+        .dash-table th {
+            text-align: left;
+            padding: 10px 9px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .dash-table td {
+            padding: 11px 9px;
+            color: rgba(255, 255, 255, 0.88);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            vertical-align: middle;
+        }
+
+        .dash-table td:nth-child(2) {
+            overflow-wrap: anywhere;
+        }
+
+        .dash-status {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: rgba(227, 192, 134, 0.16);
+            color: var(--primary-color);
+        }
+
+        .dash-bar-row {
+            margin-bottom: 14px;
+        }
+
+        .dash-bar-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .dash-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 6px;
+        }
+
+        .dash-bar-track {
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .dash-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #c48349, #e3c086);
+        }
+
+        .dash-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1030;
+        }
+
+        .dash-backdrop.open {
+            display: block;
+        }
+
+        @media only screen and (max-width: 992px) {
+            .dash-sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+                width: 270px;
+                max-width: 84vw;
+                height: 100vh;
+                height: 100dvh;
+            }
+
+            .dash-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .dash-close-btn,
+            .dash-hamburger {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .dash-topbar {
+                padding: 12px 16px;
+            }
+
+            .dash-content {
+                padding: 18px 14px;
+            }
+
+            .dash-topbar-actions .dash-btn.hide-sm {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-scheme dashboard-page">
+    <div class="dash-backdrop" id="dashBackdrop"></div>
+
+    <div class="dash-layout">
+        <aside class="dash-sidebar" id="dashSidebar" aria-label="Dashboard Sidebar">
+            <div class="dash-brand-row">
+                <a href="#overview" id="dashBrandHome">
+                    <img src="images/logo.webp" alt="Stackly">
+                </a>
+                <button type="button" class="dash-close-btn" id="dashCloseSidebar" aria-label="Close sidebar">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+
+            <div class="dash-user-chip">
+                <span class="dash-role-pill" id="dashRoleBadge">Role</span>
+                <div class="dash-user-name" id="dashUserName">Member</div>
+                <div class="dash-user-email" id="dashUserEmail">user@example.com</div>
+            </div>
+
+            <div class="dash-sidebar-scroll">
+                <ul class="dash-nav-list" id="dashSidebarNav">
+                    <li class="dash-nav-item"><a href="#overview" data-section="overview" class="active"><i class="fa fa-th-large"></i><span>Overview</span></a></li>
+                    <li class="dash-nav-item"><a href="#orders" data-section="orders"><i class="fa fa-shopping-bag"></i><span>Orders &amp; Queue</span></a></li>
+                    <li class="dash-nav-item"><a href="#menu" data-section="menu"><i class="fa fa-cutlery"></i><span>Menu &amp; Specials</span></a></li>
+                    <li class="dash-nav-item"><a href="#reservations" data-section="reservations"><i class="fa fa-calendar"></i><span>Reservations</span></a></li>
+                    <li class="dash-nav-item"><a href="#team" data-section="team"><i class="fa fa-users"></i><span>Staff &amp; Chefs</span></a></li>
+                    <li class="dash-nav-item"><a href="#analytics" data-section="analytics"><i class="fa fa-bar-chart"></i><span>Analytics</span></a></li>
+                    <li class="dash-nav-item"><a href="#inventory" data-section="inventory"><i class="fa fa-cubes"></i><span>Inventory</span></a></li>
+                    <li class="dash-nav-item"><a href="#reviews" data-section="reviews"><i class="fa fa-star"></i><span>Reviews</span></a></li>
+                    <li class="dash-nav-item"><a href="#messages" data-section="messages"><i class="fa fa-envelope"></i><span>Messages</span></a></li>
+                    <li class="dash-nav-item"><a href="#settings" data-section="settings"><i class="fa fa-cog"></i><span>Settings</span></a></li>
+                </ul>
+            </div>
+
+            <div class="dash-sidebar-foot">
+                <a href="index.html" class="dash-foot-link"><i class="fa fa-home"></i><span>Home</span></a>
+                <button type="button" class="dash-foot-link logout" id="dashLogoutBtn"><i class="fa fa-sign-out"></i><span>Logout</span></button>
+            </div>
+        </aside>
+
+        <div class="dash-main">
+            <div class="dash-topbar" role="banner">
+                <div class="dash-topbar-left">
+                    <button type="button" class="dash-hamburger" id="dashSidebarToggle" aria-label="Open sidebar">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <h1 class="dash-page-title" id="dashSectionHeading">Overview</h1>
+                </div>
+                <div class="dash-topbar-actions">
+                    <a href="404.html" class="dash-btn hide-sm"><i class="fa fa-download"></i> Export</a>
+                    <a href="404.html" class="dash-btn primary"><i class="fa fa-plus"></i> Quick Action</a>
+                </div>
+            </div>
+
+            <main class="dash-content" id="dashMainContent"></main>
+        </div>
+    </div>
+
+    <script src="js/plugins.js"></script>
+    <script src="js/designesia.js"></script>
+    <script src="js/dashboard-data.js"></script>
+    <script>
+        jQuery(function ($) {
+            var user = window.StacklyAuth ? window.StacklyAuth.getUser() : null;
+            if (!user) {
+                window.location.replace('login.html');
+                return;
+            }
+
+            var roleMeta = window.StacklyAuth.ROLES[user.role] || window.StacklyAuth.ROLES.customer;
+            $('#dashRoleBadge').text(roleMeta.badge);
+            $('#dashUserName').text(user.name);
+            $('#dashUserEmail').text(user.email);
+
+            function closeMobileSidebar() {
+                $('#dashSidebar').removeClass('open');
+                $('#dashBackdrop').removeClass('open');
+            }
+
+            $('#dashSidebarToggle').on('click', function () {
+                $('#dashSidebar').addClass('open');
+                $('#dashBackdrop').addClass('open');
+            });
+
+            $('#dashCloseSidebar, #dashBackdrop').on('click', closeMobileSidebar);
+
+            $('#dashLogoutBtn').on('click', function () {
+                window.StacklyAuth.logout();
+                window.location.href = 'index.html';
+            });
+
+            function esc(str) {
+                return $('<div/>').text(str).html();
+            }
+
+            function renderSection(sectionKey) {
+                var tab = window.getStacklyDashboardTab(sectionKey, user.role, user);
+                $('#dashSectionHeading').text(tab.title + ' — ' + roleMeta.label);
+
+                var kpiHtml = tab.kpis.map(function (k) {
+                    return '<div class="col-12 col-sm-6 col-xl-3"><div class="dash-card"><div class="dash-kpi-label">' + esc(k[0]) + '</div><div class="dash-kpi-value">' + esc(k[1]) + '</div><div class="dash-kpi-meta">' + esc(k[2]) + '</div></div></div>';
+                }).join('');
+
+                var headHtml = tab.headers.map(function (h) {
+                    return '<th>' + esc(h) + '</th>';
+                }).join('');
+
+                var rowsHtml = tab.rows.map(function (r) {
+                    return '<tr><td><strong>' + esc(r[0]) + '</strong></td><td>' + esc(r[1]) + '</td><td><span class="dash-status">' + esc(r[2]) + '</span></td><td>' + esc(r[3]) + '</td><td><a href="404.html" class="dash-btn">' + esc(r[4]) + '</a></td></tr>';
+                }).join('');
+
+                var barsHtml = tab.bars.map(function (b) {
+                    return '<div class="dash-bar-row"><div class="dash-bar-label"><span>' + esc(b[0]) + '</span><span>' + esc(b[1]) + '</span></div><div class="dash-bar-track"><div class="dash-bar-fill" style="width:' + esc(b[1]) + '"></div></div></div>';
+                }).join('');
+
+                var sideBtnsHtml = tab.sideButtons.map(function (label) {
+                    return '<a href="404.html" class="dash-btn">' + esc(label) + '</a>';
+                }).join('');
+
+                var html = '' +
+                    '<div class="row g-4 mb-4">' + kpiHtml + '</div>' +
+                    '<div class="row g-4">' +
+                        '<div class="col-12 col-lg-8">' +
+                            '<div class="dash-card">' +
+                                '<div class="dash-card-head">' +
+                                    '<h4>' + esc(tab.title) + ' &middot; ' + esc(tab.subtitle) + '</h4>' +
+                                    '<a href="404.html" class="dash-btn primary">' + esc(tab.actionText) + '</a>' +
+                                '</div>' +
+                                '<div class="table-responsive">' +
+                                    '<table class="dash-table">' +
+                                        '<thead><tr>' + headHtml + '</tr></thead>' +
+                                        '<tbody>' + rowsHtml + '</tbody>' +
+                                    '</table>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="col-12 col-lg-4">' +
+                            '<div class="dash-card">' +
+                                '<div class="dash-card-head">' +
+                                    '<h4>' + esc(tab.sideTitle) + '</h4>' +
+                                    '<a href="404.html" class="dash-btn">' + esc(tab.sideAction) + '</a>' +
+                                '</div>' +
+                                barsHtml +
+                                '<div class="mt-4 pt-3" style="border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;gap:10px;">' +
+                                    sideBtnsHtml +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+
+                $('#dashMainContent').html(html);
+            }
+
+            $('#dashSidebarNav').on('click', 'a[data-section]', function (e) {
+                e.preventDefault();
+                var key = $(this).data('section');
+                $('#dashSidebarNav a').removeClass('active');
+                $(this).addClass('active');
+                renderSection(key);
+                closeMobileSidebar();
+            });
+
+            $('#dashBrandHome').on('click', function (e) {
+                e.preventDefault();
+                $('#dashSidebarNav a').first().trigger('click');
+            });
+
+            renderSection('overview');
+        });
+    </script>
+</body>
+
+</html>

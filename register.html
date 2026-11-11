@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/icon.webp" type="image/webp" sizes="16x16">
+    <title>Register - Stackly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/coloring.css" type="text/css">
+    <link rel="stylesheet" href="css/cream.css" type="text/css" id="colors">
+    <link rel="stylesheet" href="css/03_custom.css" type="text/css">
+</head>
+
+<body class="dark-scheme auth-page">
+    <div id="wrapper">
+        <main class="auth-section">
+            <div class="auth-card">
+                <a href="index.html" class="auth-brand">
+                    <img src="images/logo.webp" alt="Stackly">
+                </a>
+                <h2>Create Account</h2>
+                <p class="auth-subtitle">Register your profile and choose your role to access the Stackly dashboard.</p>
+
+                <div class="auth-feedback" id="register_feedback" role="status" aria-live="polite"></div>
+
+                <form id="register_form" novalidate>
+                    <div class="auth-field">
+                        <label for="reg_name">Full Name (Alphabets Only)</label>
+                        <input type="text" id="reg_name" name="name" class="form-control" placeholder="e.g. Aria Chen" autocomplete="name" required>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="reg_email">Email Address</label>
+                        <input type="email" id="reg_email" name="email" class="form-control" placeholder="you@example.com" autocomplete="email" required>
+                    </div>
+
+                    <div class="auth-field">
+                        <label>Choose Role</label>
+                        <div class="role-grid">
+                            <div class="role-option">
+                                <input type="radio" name="role" id="reg_role_admin" value="admin">
+                                <label class="role-label" for="reg_role_admin"><i class="fa fa-shield"></i><span>Admin</span></label>
+                            </div>
+                            <div class="role-option">
+                                <input type="radio" name="role" id="reg_role_chef" value="chef">
+                                <label class="role-label" for="reg_role_chef"><i class="fa fa-cutlery"></i><span>Chef</span></label>
+                            </div>
+                            <div class="role-option">
+                                <input type="radio" name="role" id="reg_role_customer" value="customer" checked>
+                                <label class="role-label" for="reg_role_customer"><i class="fa fa-user"></i><span>Customer</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="reg_password">Password</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="reg_password" name="password" class="form-control" placeholder="Create strong password" autocomplete="new-password" required>
+                            <button type="button" class="pw-toggle" data-target="reg_password" aria-label="Toggle password visibility">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                        <ul class="pw-checklist" id="reg_pw_rules">
+                            <li data-rule="minLen"><i class="fa fa-circle-o"></i> Min 8 characters</li>
+                            <li data-rule="upper"><i class="fa fa-circle-o"></i> Uppercase (A-Z)</li>
+                            <li data-rule="lower"><i class="fa fa-circle-o"></i> Lowercase (a-z)</li>
+                            <li data-rule="number"><i class="fa fa-circle-o"></i> Number (0-9)</li>
+                            <li data-rule="symbol"><i class="fa fa-circle-o"></i> Symbol (!@#$...)</li>
+                        </ul>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="reg_confirm">Confirm Password</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="reg_confirm" name="confirm" class="form-control" placeholder="Re-enter password" autocomplete="new-password" required>
+                            <button type="button" class="pw-toggle" data-target="reg_confirm" aria-label="Toggle confirm password visibility">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="auth-submit-btn">Create Account</button>
+                </form>
+
+                <div class="auth-footer-links">
+                    <span>Already registered? <a href="login.html">Login</a></span>
+                    <a href="index.html"><i class="fa fa-home"></i> Return to Home</a>
+                </div>
+            </div>
+        </main>
+
+        <div id="preloader">
+            <div class="preloader1"></div>
+        </div>
+    </div>
+
+    <script src="js/plugins.js"></script>
+    <script src="js/designesia.js"></script>
+    <script>
+        jQuery(function ($) {
+            var $name = $('#reg_name');
+            var $email = $('#reg_email');
+            var $pw = $('#reg_password');
+            var $confirm = $('#reg_confirm');
+            var $fb = $('#register_feedback');
+
+            window.StacklyAuth.bindAlphaNameInput($name);
+            window.StacklyAuth.bindPasswordUI($pw, $('#reg_pw_rules'), $('#register_form'));
+
+            $('#register_form').on('submit', function (e) {
+                e.preventDefault();
+                var name = $.trim($name.val());
+                var email = $.trim($email.val());
+                var password = $pw.val() || '';
+                var confirm = $confirm.val() || '';
+                var role = $('input[name="role"]:checked').val() || 'customer';
+
+                $name.add($email).add($pw).add($confirm).removeClass('error_input');
+                $fb.stop(true, true).removeClass('error').hide();
+
+                if (!window.StacklyAuth.isValidAlphaName(name)) {
+                    $name.addClass('error_input');
+                    $fb.addClass('error').text('Full name must contain alphabets only.').fadeIn();
+                    return;
+                }
+
+                if (!window.StacklyAuth.isValidEmail(email)) {
+                    $email.addClass('error_input');
+                    $fb.addClass('error').text('Please enter a valid email address.').fadeIn();
+                    return;
+                }
+
+                var pwCheck = window.StacklyAuth.checkPassword(password);
+                if (!pwCheck.valid) {
+                    $pw.addClass('error_input');
+                    $fb.addClass('error').text('Password must be 8+ characters with uppercase, lowercase, number, and symbol.').fadeIn();
+                    return;
+                }
+
+                if (password !== confirm) {
+                    $confirm.addClass('error_input');
+                    $fb.addClass('error').text('Passwords do not match.').fadeIn();
+                    return;
+                }
+
+                localStorage.setItem('stackly_registered_prefill', JSON.stringify({
+                    name: name,
+                    email: email,
+                    role: role
+                }));
+                window.location.href = 'login.html?registered=1';
+            });
+        });
+    </script>
+</body>
+
+</html>
+

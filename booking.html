@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/icon.webp" type="image/webp" sizes="16x16">
+    <title>Reservation - Baresto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <!-- CSS Files
+    ================================================== -->
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/coloring.css" type="text/css">
+
+    <!-- css for scheme color -->
+    <link rel="stylesheet" href="css/cream.css" type="text/css" id="colors">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/03_custom.css" type="text/css">
+
+    <style>
+        .wow {
+            visibility: visible !important;
+        }
+
+        #subheader {
+            position: relative;
+        }
+
+        #subheader h1 {
+            float: none;
+            margin: 0 0 12px 0;
+            padding: 0;
+            border: none;
+            display: block;
+            font-family: var(--title-font);
+            font-size: 48px;
+            font-weight: var(--title-font-weight);
+            letter-spacing: -.015em;
+            line-height: 1.2;
+            text-transform: none;
+            color: #ffffff;
+        }
+
+        #subheader .breadcrumb {
+            margin-top: 12px;
+            margin-bottom: 0;
+        }
+
+        #contact_form h4 {
+            font-family: var(--body-font);
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        #contact_form input[type=text],
+        #contact_form input[type=email],
+        #contact_form select.form-control {
+            height: 44px;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            background: transparent;
+            border: solid 1px var(--secondary-color) !important;
+            border-radius: 3px !important;
+        }
+
+        #contact_form select.form-control {
+            appearance: auto;
+            -webkit-appearance: menulist;
+        }
+
+        #contact_form select.form-control option {
+            background-color: #18191b;
+            color: #ffffff;
+        }
+
+        #contact_form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        #contact_form textarea.form-control {
+            height: 172px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            background: transparent;
+            border: solid 1px var(--secondary-color) !important;
+            border-radius: 3px !important;
+        }
+
+        #contact_form input[type=submit].btn-line {
+            padding: 10px 32px;
+            border: solid 2px rgba(255, 255, 255, .3);
+            color: #ffffff;
+            background: transparent;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        #contact_form input[type=submit].btn-line:hover {
+            background: var(--primary-color) !important;
+            border-color: var(--primary-color);
+            color: #000000 !important;
+        }
+
+        #booking_feedback {
+            display: none;
+            margin-top: 20px;
+            padding: 14px 18px;
+            border-radius: 3px;
+            border: 1px solid var(--secondary-color);
+            color: #ffffff;
+            background: rgba(227, 192, 134, 0.12);
+        }
+
+        #booking_feedback.error {
+            border-color: #d31e2b;
+            background: rgba(211, 30, 43, 0.14);
+        }
+
+        .daterangepicker {
+            background-color: #18191b;
+            border: 1px solid var(--secondary-color);
+            color: #ffffff;
+        }
+
+        .daterangepicker .calendar-table {
+            background-color: #18191b;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .daterangepicker td.off,
+        .daterangepicker td.off.in-range,
+        .daterangepicker td.off.start-date,
+        .daterangepicker td.off.end-date {
+            background-color: #18191b;
+            color: #666666;
+        }
+
+        .daterangepicker td.available:hover,
+        .daterangepicker th.available:hover {
+            background-color: rgba(227, 192, 134, 0.25);
+            color: #ffffff;
+        }
+
+        .daterangepicker td.active,
+        .daterangepicker td.active:hover {
+            background-color: var(--primary-color);
+            color: #000000;
+        }
+
+        .booking-info-card {
+            border: 1px solid rgba(227, 192, 134, 0.25);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 3px;
+            padding: 24px 22px;
+            height: 100%;
+        }
+
+        .booking-info-card i {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .booking-info-card h4 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .booking-info-card p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        @media only screen and (max-width: 992px) {
+            header.transparent:not(.bg-dark) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: transparent !important;
+                background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 100%);
+            }
+
+            #subheader {
+                padding: 95px 0 35px 0;
+            }
+
+            #subheader h1 {
+                font-size: 38px;
+                margin: 0 0 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-scheme">
+
+    <div id="wrapper">
+
+        <!-- header begin -->
+        <header class="header_center transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- logo begin -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img class="logo logo_dark_bg" src="images/logo.webp" alt="">
+                                <img class="logo logo_light_bg" src="images/logo.webp" alt="">
+                            </a>
+                        </div>
+                        <!-- logo close -->
+
+                        <!-- small button begin -->
+                        <span id="menu-btn"></span>
+                        <!-- small button close -->
+
+                        <!-- mainmenu begin -->
+                        <nav>
+                            <ul id="mainmenu">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="menu.html">menu</a></li>
+                                <li><a href="booking.html" class="active" aria-current="page">Booking</a></li>
+                                <li><a href="about.html">About</a>
+                                    <ul>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="gallery.html">Gallery</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- mainmenu close -->
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+
+        <!-- content begin -->
+        <div id="content" class="no-bottom no-top">
+
+            <!-- subheader begin -->
+            <section id="subheader" class="jarallax text-light">
+                <img src="images/slide-1.webp" class="jarallax-img" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h5 class="uptitle">Make a</h5>
+                            <h1>Reservation</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Booking</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- subheader close -->
+
+            <!-- booking section begin -->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <form name="contactForm" id="contact_form" method="post" action="#">
+                                <div id="form_booking">
+                                    <h3>Booking now!</h3>
+                                    <p>Simply select your desired date, time, and party size, and leave the rest to us. Get ready to indulge in exquisite flavors, impeccable service, and unforgettable moments as you embark on a culinary journey like no other.</p>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4>Select Date</h4>
+                                            <input type="text" name="date" id="date" class="form-control" autocomplete="off">
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <h4>Select Time</h4>
+                                            <select name="time" id="time" class="form-control">
+                                                <option value="">Select time</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="12:00">12:00</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="18:00">18:00</option>
+                                                <option value="19:00">19:00</option>
+                                                <option value="20:00">20:00</option>
+                                                <option value="21:00">21:00</option>
+                                                <option value="22:00">22:00</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <h4>How Many Guests?</h4>
+                                            <select name="guests" id="guests" class="form-control">
+                                                <option value="1 - 4">1 - 4</option>
+                                                <option value="5 - 8">5 - 8</option>
+                                                <option value="9 - 12">9 - 12</option>
+                                                <option value="13 - 20">13 - 20</option>
+                                                <option value="20+">20+</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <h4>Enter your details</h4>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div>
+                                                        <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" pattern="[A-Za-z\s]*[A-Za-z][A-Za-z\s]*" title="Please enter alphabets and spaces only" autocomplete="name" required>
+                                                    </div>
+                                                    <div>
+                                                        <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required>
+                                                    </div>
+                                                    <div>
+                                                        <input type="tel" name="phone" id="phone" class="form-control" placeholder="Your Phone" inputmode="numeric" pattern="[0-9]+" maxlength="15" title="Please enter numbers only" autocomplete="tel" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div>
+                                                        <textarea name="message" id="message" class="form-control" placeholder="Your Message"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <div id="submit">
+                                                <input type="submit" id="send_message" value="Submit Form" class="btn-line">
+                                            </div>
+                                            <div id="booking_feedback" role="status" aria-live="polite"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- booking section close -->
+
+            <!-- booking highlights & faqs section begin -->
+            <section data-bgcolor="rgba(255, 255, 255, .05)">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-12 text-center">
+                            <h5 class="uptitle">Dining Experience</h5>
+                            <h2>Reservation Guide &amp; FAQs</h2>
+                            <div class="spacer-single"></div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-calendar-check-o"></i>
+                                <h4>Instant Table Hold</h4>
+                                <p>Reserve indoor booths, window tables, or relaxed café seating in just a few clicks.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-users"></i>
+                                <h4>Private Group Dining</h4>
+                                <p>Dedicated long-table arrangements tailored for gatherings of 9 to 20+ guests.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-leaf"></i>
+                                <h4>Dietary Care</h4>
+                                <p>Vegetarian, dairy-free, and allergen-conscious dishes prepared on request.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-star-o"></i>
+                                <h4>Celebration Setups</h4>
+                                <p>Custom dessert platters and attentive service for birthdays and anniversaries.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="booking-info-card">
+                                <h4>How long do you hold a reserved table?</h4>
+                                <p>We hold tables for 15 minutes past your reservation time. Give us a quick call at (208) 333 9296 if you are running late.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="booking-info-card">
+                                <h4>Can I request a specific seating area?</h4>
+                                <p>Yes—let us know your preference for window tables, quiet corners, or group seating in the Your Message box above.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="booking-info-card">
+                                <h4>Do you welcome walk-in guests?</h4>
+                                <p>Yes, we always reserve a portion of our café and bar seating for walk-in guests alongside advance bookings.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="booking-info-card">
+                                <h4>What are your dining hours?</h4>
+                                <p>Mon–Thu 10:30AM–9:30PM, Friday 10:00AM–10:30PM, and Sat–Sun 09:30AM–11:00PM.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- booking highlights & faqs section close -->
+
+            <!-- spaces & private events section begin -->
+            <section>
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-12 text-center">
+                            <h5 class="uptitle">Spaces &amp; Occasions</h5>
+                            <h2>Seating &amp; Private Events</h2>
+                            <div class="spacer-single"></div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-sun-o"></i>
+                                <h4>Window Espresso Counter</h4>
+                                <p>Sunlit high-top seating overlooking Collins Street, ideal for solo coffee or quick lunches.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-comments-o"></i>
+                                <h4>Velvet Lounge Booths</h4>
+                                <p>Intimate cushioned booths tucked away for relaxed conversations and evening desserts.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-cutlery"></i>
+                                <h4>Chef's Pass Table</h4>
+                                <p>Front-row seating near the open kitchen where you can watch plating in action.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-tree"></i>
+                                <h4>Courtyard Garden Patio</h4>
+                                <p>Shaded outdoor tables surrounded by greenery for fresh-air weekend brunch.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-coffee"></i>
+                                <h4>Morning Coffee Bar</h4>
+                                <p>Curated espresso service and warm pastry platters for office mornings (10–25 guests).</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-glass"></i>
+                                <h4>Private Dinner Tasting</h4>
+                                <p>Three-course seated dinner featuring Main Dishes, artisan breads, and house desserts.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-birthday-cake"></i>
+                                <h4>Milestone Celebrations</h4>
+                                <p>Complimentary custom dessert presentation and dedicated table host for celebrations.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="booking-info-card">
+                                <i class="fa fa-building-o"></i>
+                                <h4>Full Venue Buyout</h4>
+                                <p>Exclusive evening access to the entire Baresto dining room and barista bar (up to 60 guests).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- spaces & private events section close -->
+
+        </div>
+        <!-- content close -->
+
+        <!-- footer begin -->
+        <footer>
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <img class="logo" src="images/logo.webp" alt="Baresto">
+                        <p class="footer-desc">At Baresto, we craft specialty single-origin coffee, wood-fired dishes, and artisan pastries with warm hospitality since 2008.</p>
+                        <div class="social-icons">
+                            <a href="404.html"><i class="fa fa-facebook fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-rss fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-google-plus fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-skype fa-lg"></i></a>
+                            <a href="404.html"><i class="fa fa-dribbble fa-lg"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="menu.html">Our Menu</a></li>
+                            <li><a href="booking.html">Book a Table</a></li>
+                            <li><a href="about.html">Our Story &amp; Chefs</a></li>
+                            <li><a href="gallery.html">Photo Gallery</a></li>
+                            <li><a href="blog.html">Latest Journal</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center footer-contact">
+                        <h3>Our Location</h3>
+                        <p>Collins Street West, Victoria 8007 Australia</p>
+                        <p>T. (208) 333 9296</p>
+                        <p>E. <a href="mailto:contact@baresto.com">contact@baresto.com</a></p>
+                        <div class="footer-hours">
+                            <strong>Opening Hours</strong><br>
+                            Mon - Thu: 10:30AM - 9:30PM<br>
+                            Friday: 10:00AM - 10:30PM<br>
+                            Sat - Sun: 09:30AM - 11:00PM
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 sm-text-center">
+                        <h3>Newsletter</h3>
+                        <p class="footer-desc">Subscribe for seasonal menu launches, chef tasting nights, and special offers.</p>
+                        <form class="footer-newsletter" action="#" method="post">
+                            <input type="email" placeholder="Your Email" required>
+                            <button type="submit">Join</button>
+                        </form>
+                        <div class="footer-newsletter-msg" role="status" aria-live="polite"></div>
+                        <a href="404.html" class="btn-line mt-2">Reserve a Table</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 sm-text-center">
+                            &copy; Copyright 2026 - Baresto Cafe, Bar &amp; Restaurant. All Rights Reserved.
+                        </div>
+                        <div class="col-md-6 text-md-end sm-text-center subfooter-links">
+                            <a href="about.html">Our Story</a>
+                            <a href="booking.html">Reservation Policy</a>
+                            <a href="contact.html">Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
+
+        <div id="preloader">
+            <div class="preloader1"></div>
+        </div>
+    </div>
+
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="js/plugins.js"></script>
+    <script src="js/designesia.js"></script>
+    <script>
+        jQuery(function ($) {
+            if ($.fn.daterangepicker) {
+                $('#date').daterangepicker({
+                    singleDatePicker: true,
+                    autoUpdateInput: false,
+                    minDate: moment(),
+                    locale: {
+                        format: 'YYYY-MM-DD'
+                    }
+                }).on('apply.daterangepicker', function (ev, picker) {
+                    $(this).val(picker.startDate.format('YYYY-MM-DD'));
+                });
+            }
+
+            $('#contact_form').on('submit', function (e) {
+                e.preventDefault();
+                var name = $.trim($('#name').val());
+                var email = $.trim($('#email').val());
+                var phone = $.trim($('#phone').val());
+                var feedback = $('#booking_feedback');
+
+                $('#name, #email, #phone').removeClass('error_input');
+                feedback.stop(true, true).removeClass('error').hide();
+
+                if (!name || !email || !phone) {
+                    if (!name) $('#name').addClass('error_input');
+                    if (!email) $('#email').addClass('error_input');
+                    if (!phone) $('#phone').addClass('error_input');
+                    feedback.addClass('error').text('Please fill in your name, email, and phone number.').fadeIn();
+                    return;
+                }
+
+                if (window.validateBarestoContactFields && !window.validateBarestoContactFields($('#name'), $('#phone'), feedback)) {
+                    return;
+                }
+
+                feedback.stop(true, true).text('Thank you! Your reservation request has been received.').fadeIn();
+                this.reset();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+
