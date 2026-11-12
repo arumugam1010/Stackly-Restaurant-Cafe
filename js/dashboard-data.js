@@ -8,7 +8,7 @@ window.getStacklyDashboardTab = function (sectionKey, role, user) {
         overview: {
             title: 'Overview',
             subtitle: {
-                admin: 'Executive Snapshot · Collins Street West',
+                admin: 'Executive Snapshot · Chinnathirupathi, Salem',
                 chef: 'Live Culinary Command · Main Pass',
                 customer: 'Your Stackly Dining & Loyalty Hub'
             },
@@ -96,7 +96,7 @@ window.getStacklyDashboardTab = function (sectionKey, role, user) {
             rows: {
                 admin: [
                     ['#ORD-5510', '2x Truffle Rigatoni + 2x Mocktails', 'Served', '$86.00', 'Receipt'],
-                    ['#ORD-5511', 'Coffee Box (10 Cups) · Collins St', 'Out for Pickup', '$54.00', 'Track'],
+                    ['#ORD-5511', 'Coffee Box (10 Cups) · Chinnathirupathi', 'Out for Pickup', '$54.00', 'Track'],
                     ['#ORD-5512', 'Wood-Fired Sea Bass + Chardonnay', 'Cooking', '$118.00', 'View Order'],
                     ['#ORD-5513', 'Artisan Pastry Box + 4x Flat White', 'Queued', '$49.50', 'Dispatch']
                 ],
@@ -194,7 +194,7 @@ window.getStacklyDashboardTab = function (sectionKey, role, user) {
                 admin: [
                     ['Total Covers Tonight', '118', 'Breakfast, lunch & dinner'],
                     ['Window Tables Left', '2', '9:00 PM late slot open'],
-                    ['Private Room', 'Booked', 'Collins Suite · 18 guests'],
+                    ['Private Room', 'Booked', 'Salem Suite · 18 guests'],
                     ['No-Show Rate', '1.4%', 'SMS reminders active']
                 ],
                 chef: [
@@ -206,7 +206,7 @@ window.getStacklyDashboardTab = function (sectionKey, role, user) {
                 customer: [
                     ['Confirmed Bookings', '1 Active', 'Fri 7:30 PM · 4 Guests'],
                     ['Preferred Area', 'Window', 'Quiet corner saved'],
-                    ['Past Visits', '12', 'Collins Street West'],
+                    ['Past Visits', '12', 'Chinnathirupathi, Salem'],
                     ['Instant Rebook', 'Enabled', '1-tap weekend slots']
                 ]
             },
@@ -372,7 +372,7 @@ window.getStacklyDashboardTab = function (sectionKey, role, user) {
                     ['Tracked SKUs', '142', 'Beans, produce, dairy & dry goods'],
                     ['Low Stock Alerts', '3', 'Reorder queued for tomorrow'],
                     ['Coffee Bean Stock', '185 kg', '4 single-origin harvests'],
-                    ['Next Delivery', 'Thu 6:30 AM', 'Victoria Artisan Farms']
+                    ['Next Delivery', 'Thu 6:30 AM', 'Tamil Nadu Artisan Farms']
                 ],
                 chef: [
                     ['Fresh Produce Par', '96%', 'Morning harvest delivered'],
@@ -488,7 +488,7 @@ window.getStacklyDashboardTab = function (sectionKey, role, user) {
             kpis: {
                 admin: [
                     ['Unread Inquiries', '6', '2 private event requests'],
-                    ['Corporate Leads', '4 New', 'Collins St offices'],
+                    ['Corporate Leads', '4 New', 'Salem local offices'],
                     ['Avg Reply Time', '18 mins', 'Live concierge inbox'],
                     ['Resolved Today', '27', '100% SLA satisfied']
                 ],
@@ -549,7 +549,7 @@ window.getStacklyDashboardTab = function (sectionKey, role, user) {
                     ['Signed-In User', userName, userEmail],
                     ['Access Tier', activeRoleLabel, 'Full branch permissions'],
                     ['2FA Security', 'Protected', 'Strong password verified'],
-                    ['Branch Timezone', 'Melbourne', 'AEST · UTC+10']
+                    ['Branch Timezone', 'Salem, Tamil Nadu', 'IST · UTC+5:30']
                 ],
                 chef: [
                     ['Chef Profile', userName, userEmail],

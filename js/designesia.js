@@ -4,9 +4,9 @@
     'use strict'; // use strict mode
 
     // editable value
-    var logo_pos = 1; // logo position; 1 - center, 2 - left
+    var logo_pos = 2; // logo position; 1 - center, 2 - left
     var logo_center_top_margin = '-15px'; // define margin top for 'center' logo image
-    var logo_left_top_margin = '30px'; // define margin top for 'left' logo image
+    var logo_left_top_margin = '0px'; // define margin top for 'left' logo image
     var header_sticky = 1; // 1 - yes, 0 - no
     var header_color_on_scroll = 1; // 1- dark, 2 - light
 
@@ -15,6 +15,11 @@
     var logo_dir_2 = jQuery('.logo_light_bg').attr('src');
     var tmp_lltm = logo_left_top_margin;
     var mobile_menu_show = 0;
+    var lockedScrollY = 0;
+    var isRestoringScroll = false;
+    var lastScrollTop = 0;
+    var mobileNavInitialized = false;
+    var lenisInstance = null;
 
     if (header_sticky == 0) {
         $('header').addClass('header_scroll');
@@ -22,6 +27,224 @@
     $('header').addClass('transparent');
     if (header_color_on_scroll == 2) {
         $('header').addClass('header_light');
+    }
+
+    function isMobileViewport() {
+        return window.innerWidth <= 992;
+    }
+
+    function syncMobileHeaderAppearance(scrollOffset) {
+        var $header = jQuery('header');
+        if (!$header.length) return;
+        var y = typeof scrollOffset === 'number'
+            ? scrollOffset
+            : (window.pageYOffset || document.documentElement.scrollTop || 0);
+        if (isMobileViewport() && y > 20) {
+            $header.addClass('mobile-scrolled');
+        } else if (!mobile_menu_show) {
+            $header.removeClass('mobile-scrolled');
+        }
+    }
+
+    function syncMobileNavAria() {
+        var $nav = jQuery('header nav');
+        if (!$nav.length) return;
+        if (isMobileViewport()) {
+            $nav.attr('aria-hidden', mobile_menu_show === 1 ? 'false' : 'true');
+        } else {
+            $nav.removeAttr('aria-hidden');
+        }
+    }
+
+    function ensureMobileNavElements() {
+        var $header = jQuery('header');
+        var $nav = $header.find('nav').first();
+        var $menuBtn = jQuery('#menu-btn');
+        if (!$header.length || !$nav.length || !$menuBtn.length) {
+            return null;
+        }
+
+        var $backdrop = $header.children('.mobile-nav-backdrop');
+        if (!$backdrop.length) {
+            $backdrop = jQuery('<div class="mobile-nav-backdrop" aria-hidden="true"></div>').prependTo($header);
+        }
+
+        if (!$nav.children('.mobile-nav-header').length) {
+            var logoSrc = $header.find('#logo img').first().attr('src') || 'images/logo.webp';
+            var $drawerHeader = jQuery(
+                '<div class="mobile-nav-header">' +
+                    '<a href="index.html" class="mobile-nav-logo" aria-label="Stackly Home">' +
+                        '<img src="' + logoSrc + '" alt="Stackly">' +
+                    '</a>' +
+                    '<button type="button" class="mobile-nav-close" aria-label="Close navigation menu">' +
+                        '<i class="fa fa-times" aria-hidden="true"></i>' +
+                    '</button>' +
+                '</div>'
+            );
+            $nav.prepend($drawerHeader);
+        }
+
+        if (!$nav.children('.mobile-nav-contact').length) {
+            var $contactBlock = jQuery(
+                '<div class="mobile-nav-contact">' +
+                    '<div class="mobile-nav-contact-title">Contact Info</div>' +
+                    '<ul class="mobile-nav-contact-list">' +
+                        '<li>' +
+                            '<span class="mobile-nav-contact-icon" aria-hidden="true"><i class="fa fa-map-marker"></i></span>' +
+                            '<div class="mobile-nav-contact-text">' +
+                                '<span class="mobile-nav-contact-label">Location</span>' +
+                                '<span class="mobile-nav-contact-value">Chinnathirupathi, Salem, Tamil Nadu</span>' +
+                            '</div>' +
+                        '</li>' +
+                        '<li>' +
+                            '<span class="mobile-nav-contact-icon" aria-hidden="true"><i class="fa fa-phone"></i></span>' +
+                            '<div class="mobile-nav-contact-text">' +
+                                '<span class="mobile-nav-contact-label">Phone Number</span>' +
+                                '<a href="tel:2083339296" class="mobile-nav-contact-value">(208) 333 9296</a>' +
+                            '</div>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>'
+            );
+            var $authWrap = $nav.children('.header-auth').first();
+            if ($authWrap.length) {
+                $contactBlock.insertAfter($authWrap);
+            } else {
+                $nav.append($contactBlock);
+            }
+        }
+
+        $nav.attr('data-lenis-prevent', '');
+
+        $menuBtn.attr({
+            role: 'button',
+            tabindex: '0',
+            'aria-label': 'Open navigation menu',
+            'aria-expanded': mobile_menu_show === 1 ? 'true' : 'false'
+        });
+
+        return {
+            $header: $header,
+            $nav: $nav,
+            $menuBtn: $menuBtn,
+            $backdrop: $backdrop
+        };
+    }
+
+    function openMobileMenu() {
+        if (!isMobileViewport()) return;
+        var els = ensureMobileNavElements();
+        if (!els || mobile_menu_show === 1) return;
+
+        mobile_menu_show = 1;
+        lockedScrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+        if (lenisInstance && typeof lenisInstance.stop === 'function') {
+            lenisInstance.stop();
+        }
+
+        jQuery('html').addClass('mobile-menu-open');
+        jQuery('body').addClass('mobile-menu-open').css('top', (-lockedScrollY) + 'px');
+
+        els.$header.removeClass('scroll-down').addClass('scroll-up');
+        els.$menuBtn.addClass('click').attr('aria-expanded', 'true');
+        els.$backdrop.addClass('is-open');
+        els.$nav.addClass('is-open').attr('aria-hidden', 'false');
+    }
+
+    function closeMobileMenu(restoreFocus) {
+        var els = ensureMobileNavElements();
+        var wasLocked = mobile_menu_show === 1 || jQuery('body').hasClass('mobile-menu-open');
+        if (!els && !wasLocked) return;
+
+        mobile_menu_show = 0;
+
+        if (els) {
+            if (restoreFocus) {
+                els.$menuBtn.trigger('focus');
+            } else if (els.$nav[0] && els.$nav[0].contains(document.activeElement)) {
+                document.activeElement.blur();
+            }
+            els.$menuBtn.removeClass('click').attr('aria-expanded', 'false');
+            els.$backdrop.removeClass('is-open');
+            els.$nav.removeClass('is-open');
+            syncMobileNavAria();
+        }
+
+        if (wasLocked) {
+            var restoreY = lockedScrollY;
+            isRestoringScroll = true;
+            jQuery('html').removeClass('mobile-menu-open');
+            jQuery('body').removeClass('mobile-menu-open').css('top', '');
+            var prevBehavior = document.documentElement.style.scrollBehavior;
+            document.documentElement.style.scrollBehavior = 'auto';
+            window.scrollTo(0, restoreY);
+            document.documentElement.style.scrollBehavior = prevBehavior;
+            if (lenisInstance && typeof lenisInstance.start === 'function') {
+                lenisInstance.start();
+                if (typeof lenisInstance.scrollTo === 'function') {
+                    lenisInstance.scrollTo(restoreY, { immediate: true, force: true });
+                }
+            }
+            lastScrollTop = restoreY;
+            syncMobileHeaderAppearance(restoreY);
+            if (els) {
+                els.$header.removeClass('scroll-down').addClass('scroll-up');
+            }
+            setTimeout(function() {
+                isRestoringScroll = false;
+            }, 50);
+        }
+    }
+
+    function initMobileSidebar() {
+        var els = ensureMobileNavElements();
+        if (!els) return;
+        syncMobileNavAria();
+        syncMobileHeaderAppearance();
+
+        if (mobileNavInitialized) return;
+        mobileNavInitialized = true;
+
+        els.$menuBtn.on('click', function() {
+            if (mobile_menu_show === 0) {
+                openMobileMenu();
+            } else {
+                closeMobileMenu(false);
+            }
+        });
+
+        els.$menuBtn.on('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                jQuery(this).trigger('click');
+            }
+        });
+
+        jQuery(document).on('click', '.mobile-nav-close, .mobile-nav-backdrop', function() {
+            closeMobileMenu(jQuery(this).hasClass('mobile-nav-close'));
+        });
+
+        jQuery(document).on('keydown', function(e) {
+            if (e.key === 'Escape' && mobile_menu_show === 1) {
+                closeMobileMenu(true);
+            }
+        });
+
+        els.$nav.on('click', '#mainmenu a, .header-auth a, .mobile-nav-logo', function() {
+            if (mobile_menu_show === 1) {
+                closeMobileMenu(false);
+            }
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            if (mobile_menu_show !== 1) return;
+            var navEl = els.$nav[0];
+            if (navEl && navEl.contains(e.target) && navEl.scrollHeight > navEl.clientHeight) {
+                return;
+            }
+            e.preventDefault();
+        }, { passive: false });
     }
 
 
@@ -203,6 +426,9 @@
     // --------------------------------------------------
 
     jQuery(window).on("scroll", function() {
+        if (mobile_menu_show === 1 || isRestoringScroll) {
+            return;
+        }
         jQuery("header").addClass("clone", 1000, "easeOutBounce");
 
         var $document = $(document);
@@ -258,23 +484,24 @@
 
     // mainmenu arrow click
     jQuery("#mainmenu > li > span, #mainmenu > li > ul > li > span").on("click", function() {
-        $('header').css("height", "auto");
         var iteration = $(this).data('iteration') || 1;
         switch (iteration) {
             case 1:
+                $(this).addClass("open");
                 $(this).next("ul").css("height", "auto");
                 var curHeight = $(this).next("ul").height();
                 $(this).next("ul").css("height", "0");
-                $(this).next("ul").animate({
+                $(this).next("ul").stop(true).animate({
                     'height': curHeight
-                }, 300, 'easeOutCubic');
+                }, 260, 'easeOutCubic');
 
                 break;
 
             case 2:
-                $(this).next("ul").animate({
+                $(this).removeClass("open");
+                $(this).next("ul").stop(true).animate({
                     'height': "0"
-                }, 300, 'easeOutCubic');
+                }, 260, 'easeOutCubic');
                 break;
         }
         iteration++;
@@ -319,10 +546,14 @@
 
         $('header').removeClass('smaller');
         $('header').removeClass('clone');
-
         jQuery('header').removeClass("bg-dark");
-        jQuery('header').css("height", "70px");
-        mobile_menu_show = 0;
+
+        if (!isMobileViewport()) {
+            closeMobileMenu(false);
+            jQuery('header').css("height", "");
+        }
+        syncMobileNavAria();
+        syncMobileHeaderAppearance();
 
 
     });
@@ -621,6 +852,7 @@
 
     /* Lenis begin */
     const lenis = new Lenis()
+    lenisInstance = lenis;
 
     lenis.on('scroll', (e) => {
       console.log(e)
@@ -634,6 +866,7 @@
     requestAnimationFrame(raf)
     /* Lenis end */
 
+    jQuery(initMobileSidebar);
 
     $(window).on('load', function() {
 
@@ -743,27 +976,7 @@
         // navigation for mobile
         // --------------------------------------------------
 
-
-
-        jQuery('#menu-btn').on("click", function() {
-            if (mobile_menu_show == 0) {
-                jQuery('header').addClass("bg-dark");
-                jQuery(this).addClass("click");
-                var navHeight = jQuery('header nav').outerHeight(true) || parseInt(jQuery('#mainmenu').css("height"), 10) || 360;
-                var mm_height = navHeight + 100;
-                jQuery('header').stop(true).animate({
-                    height: mm_height
-                }, 300);
-                mobile_menu_show = 1;
-            } else {
-                jQuery('header').removeClass("bg-dark");
-                jQuery(this).removeClass("click");
-                jQuery('header').stop(true).animate({
-                    height: "70px"
-                }, 200);
-                mobile_menu_show = 0;
-            }
-        })
+        initMobileSidebar();
 
         // one page navigation
         /**
@@ -898,12 +1111,14 @@
         jQuery('#preloader').fadeOut(500);
     });
 
-    var lastScrollTop = 0;
-
     jQuery(window).scroll(function() {
+        if (mobile_menu_show === 1 || isRestoringScroll) {
+            return;
+        }
 
         var st = $(this).scrollTop();
-        if (st < lastScrollTop) {
+        syncMobileHeaderAppearance(st);
+        if (st <= 0 || st < lastScrollTop) {
             jQuery('header').removeClass('scroll-down').addClass('scroll-up');
         } else {
             jQuery('header').removeClass('scroll-up').addClass('scroll-down');
@@ -1105,7 +1320,13 @@
             if (!$nav.length) return;
             var $wrap = $nav.find(".header-auth");
             if (!$wrap.length) {
-                $wrap = $('<div class="header-auth" id="headerAuthNav"></div>').appendTo($nav);
+                $wrap = $('<div class="header-auth" id="headerAuthNav"></div>');
+                var $contact = $nav.children(".mobile-nav-contact").first();
+                if ($contact.length) {
+                    $wrap.insertBefore($contact);
+                } else {
+                    $wrap.appendTo($nav);
+                }
             }
             var user = this.getUser();
             if (user) {
