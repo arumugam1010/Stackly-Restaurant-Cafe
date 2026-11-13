@@ -1,4 +1,4 @@
-// © Copyright 2025 - Baresto by Designesia 
+// © Copyright 2026 - Stackly
 
 (function($) {
     'use strict'; // use strict mode
@@ -1238,7 +1238,7 @@
         sanitizeInputWithCaret(this, /[^0-9]/g);
     });
 
-    window.validateBarestoContactFields = function($name, $phone, $feedback) {
+    window.validateStacklyContactFields = function($name, $phone, $feedback) {
         var nameVal = $.trim($name.val());
         var phoneVal = $.trim($phone.val());
         var nameOk = /^[A-Za-z]+(?:\s+[A-Za-z]+)*$/.test(nameVal);

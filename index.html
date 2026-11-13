@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
     <link rel="icon" href="images/icon.webp" type="image/webp" sizes="16x16">
-    <title>Baresto - Cafe, Bar &amp; Restaurant Website Template</title>
+    <title>Stackly - Cafe, Bar &amp; Restaurant</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -30,11 +30,18 @@
         .special-card {
             border: 1px solid rgba(227, 192, 134, 0.22);
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 3px;
+            border-radius: 4px;
             overflow: hidden;
             height: 100%;
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .special-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(227, 192, 134, 0.45);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
         }
 
         .special-card img {
@@ -42,6 +49,11 @@
             aspect-ratio: 4 / 3;
             object-fit: cover;
             display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .special-card:hover img {
+            transform: scale(1.04);
         }
 
         .special-card .special-body {
@@ -296,7 +308,7 @@
                         <div class="col-lg-6">
                             <h5 class="uptitle wow fadeInUp">Discover</h5>
                             <h2 class="wow fadeInUp">Our Story</h2>
-                            <p class="lead wow fadeInUp">At "Baresto," we believe in the power of good coffee and warm hospitality. Our journey began with a simple vision: to create a welcoming space where friends, families, and strangers alike could come together to enjoy delicious beverages, homemade treats, and meaningful connections.</p>
+                            <p class="lead wow fadeInUp">At "Stackly," we believe in the power of good coffee and warm hospitality. Our journey began with a simple vision: to create a welcoming space where friends, families, and strangers alike could come together to enjoy delicious beverages, homemade treats, and meaningful connections.</p>
 
                             <p class="wow fadeInUp">As a proud member of the community, we're committed to giving back and making a positive impact wherever we can. From supporting local artisans and farmers to hosting events that celebrate diversity and inclusion, we believe in using our platform to spread joy and goodwill in our neighborhood and beyond.</p>
                         </div>
@@ -635,7 +647,7 @@
 
                         <div class="col-lg-3 col-md-6">
                             <div class="special-card">
-                                <img src="images/2.webp" alt="Herb-Roasted Chicken Feast">
+                                <img src="images/special-1.webp" alt="Herb-Roasted Chicken Feast">
                                 <div class="special-body">
                                     <div class="special-top">
                                         <h4>Herb Roast Feast</h4>
@@ -648,7 +660,7 @@
 
                         <div class="col-lg-3 col-md-6">
                             <div class="special-card">
-                                <img src="images/slide-2.webp" alt="Garlic Herb Shrimp">
+                                <img src="images/special-2.webp" alt="Garlic Herb Shrimp">
                                 <div class="special-body">
                                     <div class="special-top">
                                         <h4>Garlic Herb Shrimp</h4>
@@ -661,7 +673,7 @@
 
                         <div class="col-lg-3 col-md-6">
                             <div class="special-card">
-                                <img src="images/bg-side-2.webp" alt="Crispy Chicken Baguette">
+                                <img src="images/special-3.webp" alt="Crispy Chicken Baguette">
                                 <div class="special-body">
                                     <div class="special-top">
                                         <h4>Artisan Sandwich</h4>
@@ -674,7 +686,7 @@
 
                         <div class="col-lg-3 col-md-6">
                             <div class="special-card">
-                                <img src="images/5.webp" alt="Chef's Seasonal Plate">
+                                <img src="images/special-4.webp" alt="Chef's Seasonal Plate">
                                 <div class="special-body">
                                     <div class="special-top">
                                         <h4>Seasonal Tasting</h4>
@@ -687,7 +699,7 @@
 
                         <div class="col-lg-3 col-md-6">
                             <div class="special-card">
-                                <img src="images/slide-1.webp" alt="Warm Plum Crumble Tart">
+                                <img src="images/special-5.webp" alt="Warm Plum Crumble Tart">
                                 <div class="special-body">
                                     <div class="special-top">
                                         <h4>Plum Crumble Tart</h4>
@@ -700,7 +712,7 @@
 
                         <div class="col-lg-3 col-md-6">
                             <div class="special-card">
-                                <img src="images/1.webp" alt="Signature Morning Pairing">
+                                <img src="images/special-6.webp" alt="Signature Morning Pairing">
                                 <div class="special-body">
                                     <div class="special-top">
                                         <h4>Latte &amp; Pastry</h4>
@@ -713,7 +725,7 @@
 
                         <div class="col-lg-3 col-md-6">
                             <div class="special-card">
-                                <img src="images/4.webp" alt="House Single-Origin Espresso">
+                                <img src="images/special-7.webp" alt="House Single-Origin Espresso">
                                 <div class="special-body">
                                     <div class="special-top">
                                         <h4>Single-Origin Brew</h4>
@@ -726,7 +738,7 @@
 
                         <div class="col-lg-3 col-md-6">
                             <div class="special-card">
-                                <img src="images/bg-side-1.webp" alt="Cookie and Cappuccino">
+                                <img src="images/special-8.webp" alt="Cookie and Cappuccino">
                                 <div class="special-body">
                                     <div class="special-top">
                                         <h4>Cappuccino &amp; Cookie</h4>
@@ -750,7 +762,7 @@
                 <div class="container">
                     <div class="row g-4">
                         <div class="col-lg-12 text-center">
-                            <h5 class="uptitle">The Baresto Way</h5>
+                            <h5 class="uptitle">The Stackly Way</h5>
                             <h2>Craft &amp; Experience</h2>
                             <div class="spacer-single"></div>
                         </div>
@@ -822,7 +834,7 @@
                                 <div>
                                     <div class="highlight-tag">About Us</div>
                                     <h4>Our Story Since 2008</h4>
-                                    <p>Meet our four culinary chefs and learn how Baresto began in Chinnathirupathi, Salem.</p>
+                                    <p>Meet our four culinary chefs and learn how Stackly began in Chinnathirupathi, Salem.</p>
                                 </div>
                                 <a href="about.html" class="highlight-link">Our Story &rarr;</a>
                             </div>
@@ -883,8 +895,8 @@
             <div class="container">
                 <div class="row g-4">
                     <div class="col-lg-3 col-md-6 sm-text-center">
-                        <img class="logo" src="images/logo.webp" alt="Baresto">
-                        <p class="footer-desc">At Baresto, we craft specialty single-origin coffee, wood-fired dishes, and artisan pastries with warm hospitality since 2008.</p>
+                        <img class="logo" src="images/logo.webp" alt="Stackly">
+                        <p class="footer-desc">At Stackly, we craft specialty single-origin coffee, wood-fired dishes, and artisan pastries with warm hospitality since 2008.</p>
                         <div class="social-icons">
                             <a href="404.html" aria-label="Instagram" title="Instagram"><svg class="social-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm9.65 1.35a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z"/></svg></a>
                             <a href="404.html" aria-label="Facebook" title="Facebook"><svg class="social-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.75l.41-3.2H13.5V8.55c0-.93.26-1.56 1.59-1.56h1.7V4.12c-.29-.04-1.3-.12-2.47-.12-2.45 0-4.12 1.49-4.12 4.24v2.36H7.44v3.2h2.76V22h3.3Z"/></svg></a>
@@ -911,7 +923,7 @@
                         <h3>Our Location</h3>
                         <p>Chinnathirupathi, Salem, Tamil Nadu</p>
                         <p>T. (208) 333 9296</p>
-                        <p>E. <a href="mailto:contact@baresto.com">contact@baresto.com</a></p>
+                        <p>E. <a href="mailto:contact@stackly.com">contact@stackly.com</a></p>
                         <div class="footer-hours">
                             <strong>Opening Hours</strong><br>
                             Mon - Thu: 10:30AM - 9:30PM<br>
@@ -937,7 +949,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-md-6 sm-text-center">
-                            &copy; Copyright 2026 - Baresto Cafe, Bar &amp; Restaurant. All Rights Reserved.
+                            &copy; Copyright 2026 - Stackly Cafe, Bar &amp; Restaurant. All Rights Reserved.
                         </div>
                         <div class="col-md-6 text-md-end sm-text-center subfooter-links">
                             <a href="about.html">Our Story</a>
